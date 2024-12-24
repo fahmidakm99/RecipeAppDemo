@@ -18,6 +18,7 @@
     <ion-item *ngIf="image">
       <ion-label position="stacked">Image Preview</ion-label><br>
       <img [src]="image" alt="Image preview" style="width: 100%; height: auto;">
+      <ion-button class="removeimage" (click)="removeImage()">Remove Image <ion-icon name="trash"></ion-icon></ion-button>
     </ion-item>
     
     <br>
