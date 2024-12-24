@@ -1,7 +1,6 @@
 # RecipeAppDemo
 
-Home Page
-<img width="366" alt="Screenshot 2024-12-24 at 2 59 01 PM" src="https://github.com/user-attachments/assets/44a415d5-0e5d-4171-8251-258529be9648" /> <img width="375" alt="Screenshot 2024-12-24 at 2 59 21 PM" src="https://github.com/user-attachments/assets/48337c46-d1b7-4013-ac93-19cde30951e6" />
+Home Page <img width="366" alt="Screenshot 2024-12-24 at 2 59 01 PM" src="https://github.com/user-attachments/assets/44a415d5-0e5d-4171-8251-258529be9648" /> <img width="375" alt="Screenshot 2024-12-24 at 2 59 21 PM" src="https://github.com/user-attachments/assets/48337c46-d1b7-4013-ac93-19cde30951e6" />
 
 All Recipes page
 <img width="362" alt="Screenshot 2024-12-24 at 2 57 45 PM" src="https://github.com/user-attachments/assets/684bd7da-3885-4297-9912-d9f3a72516dd" />
