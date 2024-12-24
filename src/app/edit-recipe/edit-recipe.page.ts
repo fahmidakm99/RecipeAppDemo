@@ -153,8 +153,8 @@ export class EditRecipePage implements OnInit {
       reader.readAsDataURL(file);  // Convert the image to base64
     }
   }
-  // removeImage(): void {
-  //   this.image = null;  // Clears the selected image
-  // }
+ removeImage(): void {
+    this.image = null;  // Clear the stored image
+  }
 
 }
