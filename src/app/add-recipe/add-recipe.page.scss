@@ -1,0 +1,37 @@
+.form-container {
+    padding: 16px;
+  }
+  
+  .ingredients-container ion-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  ion-button {
+    margin-top: 16px;
+  }
+  .greenAdd {
+    --background: #64b000; /* Green background */
+    --color: white; /* Text color (white) */
+  }
+.blueCancel{
+    --background:#6462df;
+    --color:white;
+}
+.greyreset{
+  --background: #9291ad;
+  --color:white;
+}
+.hidden-field {
+  display: none;
+}
+
+.toolbar{
+  // --background: #404040;
+  color: #6462df;
+  
+}
+.addIngredient-color{
+  color: #6462df;
+}
