@@ -139,7 +139,8 @@ export class EditRecipePage implements OnInit {
   
   
   cancel() {
-    this.recipeForm.reset();
+      // this.recipeForm.reset();
+    this.router.navigate(['/home']);
   }
 
   onImageChange(event: any): void {
