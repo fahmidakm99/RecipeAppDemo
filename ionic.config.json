@@ -1,0 +1,7 @@
+{
+  "name": "RecipieApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
