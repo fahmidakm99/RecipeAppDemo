@@ -46,10 +46,25 @@ export class RecipieService {
   }
 
   // Add a new recipe
+   // Add a new recipe
+  // async addRecipe(recipe: any) {
+  //   try {
+  //     const response: any = await this.http.post(this.apiUrl, recipe).toPromise();
+  //     const generatedId = response.name; // Firebase returns the generated key
+  //     const updatedRecipe = { ...recipe, id: generatedId };
+  
+  //     const currentRecipes = this.recipes.getValue();
+  //     this.recipes.next([...currentRecipes, updatedRecipe]);
+  
+  //     await this._storage?.set('recipes', this.recipes.getValue());
+  //   } catch (error) {
+  //     console.error('Error saving recipe:', error);
+  //   }
+  // }
   async addRecipe(recipe: any) {
     try {
       const response: any = await this.http.post(this.apiUrl, recipe).toPromise();
-      const generatedId = response.name; // Firebase returns the generated key
+      const generatedId = response.name; // Firebase-generated key
       const updatedRecipe = { ...recipe, id: generatedId };
   
       const currentRecipes = this.recipes.getValue();
@@ -60,7 +75,6 @@ export class RecipieService {
       console.error('Error saving recipe:', error);
     }
   }
-
   // Load all recipes
   async getRecipes() {
     try {
