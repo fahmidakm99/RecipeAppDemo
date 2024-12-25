@@ -15,7 +15,7 @@ export class CategoriesPage {
   idsByCategory: { [key: string]: string[] } = {}; 
 
   categories = [
-    { name: 'Sweet', img: 'assets/images/sweet .jpeg' },
+    { name: 'Sweets', img: 'assets/images/sweet .jpeg' },
     { name: 'Curries', img: 'assets/images/curries.jpeg' },
     { name: 'Sadhya', img: 'assets/images/sadhya.jpeg'},
     { name: 'Rice', img: 'assets/images/rice.jpeg' },
