@@ -18,28 +18,53 @@ export class SingleRecipieInfoPage implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {
-    const recipeId = this.route.snapshot.paramMap.get('id') || ''; // Default to empty string if null
+  // ngOnInit() {
+  //   const recipeId = this.route.snapshot.paramMap.get('id') || ''; // Default to empty string if null
+  //   if (!recipeId) {
+  //     console.error('Recipe ID is missing.');
+  //     return; // Optionally handle missing ID case
+  //   }
+
+  //   this.recipe = this.recipeService.getRecipeById(recipeId);
+
+  //   // Initialize the `isInList` status for ingredients
+  //   if (this.recipe?.ingredients) {
+  //     this.updateIngredientStatuses();
+  //   }
+
+  //   // Subscribe to shopping list updates to ensure reactive UI
+  //   this.shoppingListService.shoppingList$.subscribe(() => {
+  //     this.updateIngredientStatuses();
+  //   });
+
+  //   this.shoppingListService.fetchFromFirebase();
+  // }
+ ngOnInit() {
+    const recipeId = this.route.snapshot.paramMap.get('id') || '';
     if (!recipeId) {
       console.error('Recipe ID is missing.');
-      return; // Optionally handle missing ID case
+      return;
     }
-
+  
     this.recipe = this.recipeService.getRecipeById(recipeId);
-
-    // Initialize the `isInList` status for ingredients
-    if (this.recipe?.ingredients) {
+  
+    if (!this.recipe) {
+      console.error(`Recipe not found for ID: ${recipeId}`);
+      return;
+    }
+  
+    if (this.recipe.ingredients) {
       this.updateIngredientStatuses();
     }
-
-    // Subscribe to shopping list updates to ensure reactive UI
+  
     this.shoppingListService.shoppingList$.subscribe(() => {
-      this.updateIngredientStatuses();
+      if (this.recipe?.ingredients) {
+        this.updateIngredientStatuses();
+      }
     });
-
+  
     this.shoppingListService.fetchFromFirebase();
   }
-
   // Check if an ingredient is in the shopping list
   isInShoppingList(ingredient: any): boolean {
     return this.shoppingListService.isInList(ingredient);
@@ -47,11 +72,26 @@ export class SingleRecipieInfoPage implements OnInit {
 
   // Update the `isInList` status for each ingredient
   private updateIngredientStatuses() {
+    console.log('Updating ingredient statuses:', this.recipe?.ingredients);
+  
+    if (!this.recipe?.ingredients) {
+      console.error('Ingredients are undefined.');
+      return;
+    }
+  
     this.recipe.ingredients = this.recipe.ingredients.map((ingredient: any) => ({
       ...ingredient,
       isInList: this.isInShoppingList(ingredient),
     }));
+  
+    console.log('Updated ingredients:', this.recipe.ingredients);
   }
+  // private updateIngredientStatuses() {
+  //   this.recipe.ingredients = this.recipe.ingredients.map((ingredient: any) => ({
+  //     ...ingredient,
+  //     isInList: this.isInShoppingList(ingredient),
+  //   }));
+  // }
   
   editRecipe(recipeId: string) {
     this.router.navigate(['/edit-recipe', recipeId]);
