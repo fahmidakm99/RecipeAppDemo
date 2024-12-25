@@ -17,7 +17,7 @@
 # Recipe Detail page
 <img width="364" alt="Screenshot 2024-12-24 at 3 00 04 PM" src="https://github.com/user-attachments/assets/b6402c43-0e26-491e-97bf-3a26f8264a0e" /> 
 <img width="356" alt="Screenshot 2024-12-24 at 2 58 14 PM" src="https://github.com/user-attachments/assets/558f9fcb-67cc-489c-a061-83390427710e" /> 
-<img width="372" alt="Screenshot 2024-12-25 at 11 55 11 AM" src="https://github.com/user-attachments/assets/50f47662-2b2c-47c9-bf93-c0c861ecbee7" />
+<img width="366" alt="Screenshot 2024-12-25 at 11 56 55 AM" src="https://github.com/user-attachments/assets/6ce5e583-5663-459e-b0b9-997b7e65690c" />
 <img width="367" alt="Screenshot 2024-12-24 at 3 01 01 PM" src="https://github.com/user-attachments/assets/d64fe5fe-5f48-4103-bb21-85fe5066a676" />
 
 # Edit recipe
