@@ -22,6 +22,10 @@ export class CategoriesPage {
     { name: 'Breakfast', img: 'assets/images/breakfast.jpeg'},
     { name: 'Snacks', img: 'assets/images/snacks.jpeg'},
     { name: 'Healthy', img: 'assets/images/health.jpeg'},
+    { name: 'Spicy', img: 'assets/images/spicy.jpeg'},
+    { name: 'Drinks', img: 'assets/images/Drinks.jpeg'},
+    { name: 'Pickles', img: 'assets/images/Pickles.jpeg'},
+    { name: '5min Recipie', img: 'assets/images/5min.jpeg'},
   ];
 
   constructor(private router: Router,
