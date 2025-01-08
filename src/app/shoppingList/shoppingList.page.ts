@@ -26,7 +26,19 @@ export class ShoppingListPage {
       console.log('Shopping List:', this.shoppingList);
     });
   }
+  // Handle pull-to-refresh
+  doRefresh(event: any) {
+    console.log('Begin async operation');
 
+    // Simulate an async operation
+    setTimeout(() => {
+      // Refresh logic: you can fetch updated data here
+      this.shoppingList = [...this.shoppingList]; // Example refresh logic
+      console.log('Async operation has ended');
+      event.target.complete(); // Stop the refresher
+    }, 2000);
+  }
+  
   removeFromShoppingList(ingredient: any) {
     this.shoppingListService.removeFromList(ingredient);
   }
