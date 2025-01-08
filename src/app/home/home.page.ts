@@ -60,6 +60,19 @@ export class HomePage {
     
   }
 
+   // Refresh recipes when pull-to-refresh is triggered
+ doRefresh(event: any) {
+  console.log('Refreshing recipes...');
+  this.recipeService.getRecipes().then((recipes) => {
+    console.log('Recipes refreshed:', recipes);
+    this.recipes = this.getRandomRecipes(recipes, 5); // Update recipes with 5 random items
+    event.target.complete(); // Complete the refresh action
+  }).catch((error) => {
+    console.error('Error refreshing recipes:', error);
+    event.target.complete(); // Complete the refresh even if there's an error
+  });
+}
+  
   getRandomRecipes(array: any[], count: number): any[] {
     const shuffled = [...array].sort(() => Math.random() - 0.5); // Shuffle array
     return shuffled.slice(0, count); // Return `count` recipes
