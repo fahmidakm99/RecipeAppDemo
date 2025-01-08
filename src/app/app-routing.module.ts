@@ -51,6 +51,12 @@ const routes: Routes = [
     path: 'shoppingList',
     loadChildren: () => import('./shoppingList/shoppingList.module').then( m => m.ShoppingListPageModule)
   },
+    { path: 'monthly-shopping-list', 
+    loadChildren: () => import('./monthly-shopping-list/monthly-shopping-list.module').then( m => m.MonthlyShoppingListPageModule)
+  },
+  {  path: 'weekly-shopping-list', 
+    loadChildren: () => import('./weekly-shopping-list/weekly-shopping-list.module').then( m => m.WeeklyShoppingListPageModule)
+  },
  
   {
     path: '**',
