@@ -46,4 +46,18 @@ export class FavoritesPage implements OnInit {
   openRecipe(recipeId: string) {
     this.router.navigate(['/single-recipie-info', recipeId]); // Navigate to single-recipie-info with the ID
   }
+
+  refreshFavorites(event: any) {
+    // Reload favorites during pull-to-refresh
+    this.recipeService.fetchFavorites().subscribe({
+      next: (data) => {
+        this.favorites = data;
+        event.target.complete(); // Stop the refresher
+      },
+      error: (err) => {
+        console.error('Error refreshing favorites:', err);
+        event.target.complete(); // Ensure the refresher stops even if there's an error
+      },
+    });
+  }
 }
