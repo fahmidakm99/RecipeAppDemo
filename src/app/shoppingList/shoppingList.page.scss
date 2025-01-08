@@ -1,5 +1,38 @@
-.toolbar{
-    // --background: #404040;
-    color: #6462df;
-    
+.toolbar {
+  // --background: #404040;
+  color: #6462df;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin: 13px;
+}
+
+.monthly-button,
+.weekly-button {
+  --background: #6462df;
+  color: #fff;
+  flex: 1;
+  margin: 0 10px;
+  font-size: small;
+  font-family: system-ui;
+}
+
+.add-item-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  margin-left: 17px;
+}
+
+.add-item-button {
+  --background: #64b000;
+  color: #fff;
+  padding-right: 15px;
+  font-size: small;
+  font-family: system-ui;
+}
+.items {
+  font-family: system-ui;
 }
