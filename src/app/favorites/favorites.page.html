@@ -12,6 +12,14 @@
 </ion-header>
 
 <ion-content>
+
+   <ion-refresher slot="fixed" (ionRefresh)="refreshFavorites($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      refreshingSpinner="crescent"
+    ></ion-refresher-content>
+  </ion-refresher>
+  
   <ion-list>
     <ion-item *ngFor="let recipe of favorites; let i = index" (click)="openRecipe(favorites[i])">
       <ion-avatar slot="start">
