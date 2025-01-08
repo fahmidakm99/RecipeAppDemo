@@ -41,3 +41,20 @@
 <img width="1557" alt="Screenshot 2024-12-24 at 11 26 22 PM" src="https://github.com/user-attachments/assets/4212d586-ce85-4aa1-ab8c-caa461d27725" />
 <img width="1481" alt="Screenshot 2024-12-24 at 11 26 07 PM" src="https://github.com/user-attachments/assets/c3b186fd-fa21-4c99-a056-826c1caaecb3" />
 <img width="1268" alt="Screenshot 2025-01-08 at 7 48 18 PM" src="https://github.com/user-attachments/assets/f1e59e63-7939-43ae-a6b4-658c0e37b54f" />
+
+#some commands
+ionic capacitor open android
+ionic capacitor run android
+adb devices
+ionic capacitor run android --target=emulator-5554
+ionic capacitor build android
+emulator -list-avds 
+
+Rm and add platforms for iOS
+Ionic Cordova prepare
+
+. npm cache clean --force (delete node modules and run this command for any errors with node modules installation)
+. npm rebuild node-sass --force (for node sass related error)
+. ionic cordova prepare : to copy the assets for each platform
+. ionic cordova platforms add/rm android/ios/browser ( to add or remove platform for which builds should be generated)
+. After adding platform if there is issue with any plugin or we want to add new plugin  ionic cordova plugin add/rm <plugin name> <plugin variables>
