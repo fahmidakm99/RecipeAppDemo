@@ -9,6 +9,13 @@
 </ion-header>
 
 <ion-content>
+   <!-- Refresher Component -->
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content
+        pullingIcon="chevron-down-circle-outline"
+        refreshingSpinner="crescent">
+      </ion-refresher-content>
+    </ion-refresher>
   <!-- Buttons for Monthly and Weekly Shopping Lists -->
   <div class="buttons">
     <ion-button class="monthly-button" (click)="openMonthlyList()"
