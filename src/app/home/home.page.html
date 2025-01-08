@@ -27,6 +27,14 @@
     </ion-toolbar>
   </ion-header>
 
+   <!-- Refresher Component -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      refreshingSpinner="crescent"
+    >
+    </ion-refresher-content>
+  </ion-refresher>
 
  <!-- Swiper Carousel -->
   <div class="custom-slider">
