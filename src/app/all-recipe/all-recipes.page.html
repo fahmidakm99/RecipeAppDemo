@@ -9,22 +9,36 @@
     </ion-buttons>
     <ion-title>All Recipes</ion-title>
 
-          <!-- Favorites Icon -->
-          <ion-buttons slot="end">
-            <ion-button (click)="goToFavorites()">
-              <ion-icon slot="icon-only" name="heart"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-
+    <!-- Favorites Icon -->
+    <ion-buttons slot="end">
+      <ion-button (click)="goToFavorites()">
+        <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <!-- Search Bar -->
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Search recipes..."
+      (ionInput)="filterRecipes($event)"
+    >
+    </ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let recipe of recipes" (click)="openRecipe(recipe.id)">
+    <ion-item
+      *ngFor="let recipe of filteredRecipes"
+      (click)="openRecipe(recipe.id)"
+    >
+      <!-- <ion-item *ngFor="let recipe of recipes" (click)="openRecipe(recipe.id)"> -->
       <!-- Recipe Image -->
       <ion-avatar slot="start">
-        <img [src]="recipe.image || 'assets/images/default.jpeg'" alt="Recipe Image" />
+        <img
+          [src]="recipe.image || 'assets/images/default.jpeg'"
+          alt="Recipe Image"
+        />
       </ion-avatar>
 
       <!-- Recipe Name and Categories -->
@@ -35,20 +49,31 @@
 
       <div>
         <!-- Edit Button -->
-        <ion-button fill="clear" (click)="editRecipe(recipe); $event.stopPropagation()">
+        <ion-button
+          fill="clear"
+          (click)="editRecipe(recipe); $event.stopPropagation()"
+        >
           <ion-icon name="pencil" color="primary"></ion-icon>
         </ion-button>
         <!-- Delete Button -->
-        <ion-button fill="clear" (click)="deleteRecipe(recipe); $event.stopPropagation()">
+        <ion-button
+          fill="clear"
+          (click)="deleteRecipe(recipe); $event.stopPropagation()"
+        >
           <ion-icon name="trash" color="danger"></ion-icon>
         </ion-button>
       </div>
 
       <!-- Favorite Icon -->
-      <ion-button slot="end" fill="clear" (click)="toggleFavorite(recipe); $event.stopPropagation()">
+      <ion-button
+        slot="end"
+        fill="clear"
+        (click)="toggleFavorite(recipe); $event.stopPropagation()"
+      >
         <ion-icon
           [name]="recipe.isFavorite ? 'heart' : 'heart-outline'"
-          color="danger">
+          color="danger"
+        >
         </ion-icon>
       </ion-button>
     </ion-item>
