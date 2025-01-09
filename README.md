@@ -42,10 +42,11 @@
 
 # Monthly shopping list page
 <img width="377" alt="Screenshot 2025-01-08 at 7 37 55 PM" src="https://github.com/user-attachments/assets/d566d742-636b-48bb-a654-1ec512e9975b" />
+<img width="359" alt="Screenshot 2025-01-09 at 3 18 52 PM" src="https://github.com/user-attachments/assets/ec5c37a4-cdf7-4ccc-af1f-a1c2fe77d88c" />
 
 # Add item in monthly shopping list page
-<img width="359" alt="Screenshot 2025-01-09 at 3 18 52 PM" src="https://github.com/user-attachments/assets/ec5c37a4-cdf7-4ccc-af1f-a1c2fe77d88c" />
 <img width="364" alt="Screenshot 2025-01-09 at 3 19 06 PM" src="https://github.com/user-attachments/assets/1c39a122-eac4-49f2-aa43-f6316a7cc30e" />
+<img width="360" alt="Screenshot 2025-01-09 at 3 19 13 PM" src="https://github.com/user-attachments/assets/1811af9d-a4d1-4b77-879b-4ed9ba27b560" />
 
 # Weekly shopping list page 
 <img width="364" alt="Screenshot 2025-01-08 at 7 38 19 PM" src="https://github.com/user-attachments/assets/0745fa38-1276-45aa-8d3e-cf7090a321a3" />
