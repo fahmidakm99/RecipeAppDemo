@@ -64,6 +64,7 @@
 <img width="1268" alt="Screenshot 2025-01-08 at 7 48 18 PM" src="https://github.com/user-attachments/assets/f1e59e63-7939-43ae-a6b4-658c0e37b54f" />
 
 #some commands
+/*
 ionic capacitor open android
 ionic capacitor run android
 adb devices
@@ -79,3 +80,4 @@ Ionic Cordova prepare
 . ionic cordova prepare : to copy the assets for each platform
 . ionic cordova platforms add/rm android/ios/browser ( to add or remove platform for which builds should be generated)
 . After adding platform if there is issue with any plugin or we want to add new plugin  ionic cordova plugin add/rm <plugin name> <plugin variables>
+*/
