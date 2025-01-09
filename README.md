@@ -52,8 +52,8 @@
 <img width="364" alt="Screenshot 2025-01-08 at 7 38 19 PM" src="https://github.com/user-attachments/assets/0745fa38-1276-45aa-8d3e-cf7090a321a3" />
 
 # Add item in weekly shopping list page
-<img width="363" alt="Screenshot 2025-01-09 at 3 19 23 PM" src="https://github.com/user-attachments/assets/e56765f5-c83b-480e-9101-abc927d45e21" />
-
+<img width="361" alt="Screenshot 2025-01-09 at 3 36 35 PM" src="https://github.com/user-attachments/assets/7e12d0e6-6fc9-4c5e-814d-c596771dcfc3" />
+<img width="359" alt="Screenshot 2025-01-09 at 3 36 42 PM" src="https://github.com/user-attachments/assets/312d6749-daaf-4478-b2f3-2cf4dfed299d" />
 
 # favorites page
 <img width="360" alt="Screenshot 2024-12-24 at 2 59 13 PM" src="https://github.com/user-attachments/assets/d16f7e5b-3846-4cf4-92ac-8dd59f5b77c7" />
