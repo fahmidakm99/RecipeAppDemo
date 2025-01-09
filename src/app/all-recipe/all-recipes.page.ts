@@ -39,6 +39,7 @@ export class AllRecipesPages implements OnInit {
         ...recipe,
         isFavorite: this.recipeService.isFavorite(recipe),
       }));
+       this.filteredRecipes = [...this.recipes]; // Initialize filteredRecipes with all recipes
     });
     // this.recipeService.getRecipes().then(recipes => {
     //   console.log('Loaded recipes:', recipes);
@@ -93,6 +94,19 @@ export class AllRecipesPages implements OnInit {
     };
   
     this.recipeService.updateRecipe(recipe.id, updatedData); // Call the update method from the service
+  }
+  
+  filterRecipes(event: any) {
+    const searchTerm = event.target.value?.toLowerCase().trim();
+    if (!searchTerm) {
+      // If search term is empty, show all recipes
+      this.filteredRecipes = [...this.recipes];
+    } else {
+      // Otherwise, filter recipes based on the search term
+      this.filteredRecipes = this.recipes.filter((recipe) =>
+        recipe.name.toLowerCase().includes(searchTerm)
+      );
+    }
   }
   
 }
