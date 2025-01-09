@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar class="toolbar">
     <ion-buttons slot="start">
@@ -8,16 +7,17 @@
   </ion-toolbar>
 </ion-header>
 
-
-
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let dish of dishes; let i = index" (click)="openRecipe(ids[i])">
+  <!-- Search Bar -->
+  <ion-searchbar (ionInput)="filterDishes($event)" placeholder="Search dishes..."></ion-searchbar>
 
+  <ion-list>
+    <!-- <ion-item *ngFor="let dish of dishes; let i = index" (click)="openRecipe(ids[i])"> -->
+    <ion-item *ngFor="let dish of filteredDishes; let i = index" (click)="openRecipe(ids[i])">
       <ion-thumbnail slot="start">
         <img class="recipeImage" [src]="images[i]" alt="{{ dish }}" />
       </ion-thumbnail>
-    
+
       <ion-label>{{ dish }}</ion-label>
     </ion-item>
   </ion-list>
