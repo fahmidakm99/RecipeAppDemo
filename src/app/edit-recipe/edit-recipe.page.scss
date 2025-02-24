@@ -1,6 +1,6 @@
 .toolbar{
     // --background: #404040;
-    color: #6462df;
+    color: var(--primary-color);
     
 }
 .greenAdd {
@@ -8,17 +8,17 @@
     --color: white; /* Text color (white) */
   }
 .blueCancel{
-    --background:#6462df;
+    --background:var(--primary-color);
     --color:white;
 }
 .addIngredient-color{
-    color: #6462df;
+    color: var(--primary-color);
   }
-.removeimage{
+  .removeimage{
     position: absolute; 
     bottom: 10px; 
     right: 10px; 
     z-index: 10;
-    --background: #6462df;
+    --background: var(--primary-color);
     --color:white;
   }
