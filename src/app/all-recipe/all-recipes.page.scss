@@ -26,23 +26,7 @@ ion-button {
 
 .toolbar {
   // --background: #404040;
-  color: #6462df;
+  color: var(--primary-color);
 
 }
 
-// /* Styles for Cancel button */
-// .cancel-button {
-//   color: var(--ion-color-success-contrast); /* Violet color */
-//   --background: #6462df;
-//   --border-radius: 13px;
-//   --border: 2px solid #6462df;
-// }
-
-// /* Styles for Delete button */
-// .delete-button {
-//   --color: white; /* White text */
-//   --background: #c5000f; /* Red background */
-//   --background-hover: darkred; /* Dark red on hover */
-//   --border-radius: 13px;
-//   --border: 2px solid #c5000f;
-// }
