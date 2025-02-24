@@ -1,7 +1,9 @@
 .toolbar{
     // --background: #404040;
-    color: #6462df;    
+    color: var(--primary-color);
+    
 }
 .preparation-text {
     white-space: pre-wrap; /* Preserve line breaks and spaces */
   }
+  
