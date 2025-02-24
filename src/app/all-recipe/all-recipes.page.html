@@ -4,9 +4,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
+
     <ion-title>All Recipes</ion-title>
 
     <!-- Favorites Icon -->
@@ -14,6 +12,9 @@
       <ion-button (click)="goToFavorites()">
         <ion-icon slot="icon-only" name="heart"></ion-icon>
       </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
   <!-- Search Bar -->
