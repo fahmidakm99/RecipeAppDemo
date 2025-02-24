@@ -1,34 +1,41 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
+import { IonicModule } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-// Import Firebase modules
-
-import { provideFirebaseApp } from '@angular/fire/app';
-import { initializeApp } from 'firebase/app';
-
-// Import your environment configuration
-import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { ReactiveFormsModule } from '@angular/forms';
+import { RecipieService } from './recipie.service';
+import { MealPlannerModalComponent } from './my-space/mealplanner-modal.component';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
+
+
+const firebaseConfig = {
+    apiKey: "AIzaSyBDRTsmi1wi5okX4wqV5fR2iJfLdJZxlyg",
+    authDomain: "recipe-32d20.firebaseapp.com",
+    projectId: "recipe-32d20",
+    storageBucket: "recipe-32d20.appspot.com",
+    messagingSenderId: "1078180605683",
+    appId: "1:1078180605683:android:90d41d4174b2db8f499186"
+  };
+  
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
-    BrowserModule, 
-    IonicModule.forRoot(), 
+    BrowserModule,
+    IonicModule.forRoot(),
     AppRoutingModule,
-    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireAuthModule,
     HttpClientModule,
-    ReactiveFormsModule
+    IonicStorageModule.forRoot(), 
+    MealPlannerModalComponent,
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [RecipieService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
