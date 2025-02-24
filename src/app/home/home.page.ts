@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecipieService } from '../recipie.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,8 @@ export class HomePage {
 
   constructor(
     private router: Router,
-    private recipeService: RecipieService
+    private recipeService: RecipieService,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
@@ -37,7 +39,10 @@ export class HomePage {
     }, 5000); // Update quote every 5 seconds
     this.loadRecipes(); // Fetch recipes on component initialization
   }
-
+  logout() {
+    console.log("logout");
+    this.authService.logout();
+  }
   displayRandomQuote() {
     const randomIndex = Math.floor(Math.random() * this.quotes.length);
     this.currentQuote = this.quotes[randomIndex];
@@ -59,8 +64,7 @@ export class HomePage {
     });
     
   }
-
-   // Refresh recipes when pull-to-refresh is triggered
+ // Refresh recipes when pull-to-refresh is triggered
  doRefresh(event: any) {
   console.log('Refreshing recipes...');
   this.recipeService.getRecipes().then((recipes) => {
@@ -72,7 +76,6 @@ export class HomePage {
     event.target.complete(); // Complete the refresh even if there's an error
   });
 }
-  
   getRandomRecipes(array: any[], count: number): any[] {
     const shuffled = [...array].sort(() => Math.random() - 0.5); // Shuffle array
     return shuffled.slice(0, count); // Return `count` recipes
@@ -100,8 +103,13 @@ export class HomePage {
   
   goToFavorites() {
     console.log("clicked fav")
-    this.router.navigate(['/favorites']); // Adjust the route based on your app's routing setup
+    this.router.navigate(['/tabs/favorites']); // Adjust the route based on your app's routing setup
   }
+  goToMySpace() {
+    console.log("clicked myspace")
+    this.router.navigate(['/mySpace']); // Adjust the route based on your app's routing setup
+  }
+
   openRecipe(recipeId: string) {
     console.log("slider open");
     this.router.navigate(['/single-recipie-info', recipeId]); // Navigate to single-recipie-info with the ID
