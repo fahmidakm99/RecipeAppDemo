@@ -1,6 +1,6 @@
 .toolbar {
   // --background: #404040;
-  color: #6462df;
+  color: var(--primary-color);
 }
 
 .buttons {
@@ -11,7 +11,7 @@
 
 .monthly-button,
 .weekly-button {
-  --background: #6462df;
+  --background: var(--primary-color);
   color: #fff;
   flex: 1;
   margin: 0 10px;
