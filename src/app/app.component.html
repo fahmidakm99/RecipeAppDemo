@@ -9,19 +9,19 @@
     </ion-header>
     <ion-content class="ion-padding">
       <ion-list>
-        <ion-item (click)="closeMenuAndNavigate('/recipie/home')">
+        <ion-item (click)="closeMenuAndNavigate('/tabs/home')">
           <ion-icon slot="start" name="home-outline"></ion-icon>
           <ion-label>Home</ion-label>
         </ion-item>
-        <ion-item (click)="closeMenuAndNavigate('/favorites')">
+        <ion-item (click)="closeMenuAndNavigate('/tabs/favorites')">
           <ion-icon slot="start" name="heart"></ion-icon>
           <ion-label>Favorites</ion-label>
         </ion-item>
-        <ion-item (click)="closeMenuAndNavigate('/categories')">
+        <ion-item (click)="closeMenuAndNavigate('/tabs/categories')">
           <ion-icon slot="start" name="shapes-outline"></ion-icon>
           <ion-label>Categories</ion-label>
         </ion-item>
-        <ion-item (click)="closeMenuAndNavigate('/shoppingList')">
+        <ion-item (click)="closeMenuAndNavigate('/tabs/shoppingList')">
           <ion-icon slot="start" name="cart-outline"></ion-icon>
           <ion-label>Shopping List</ion-label>
         </ion-item>
@@ -32,6 +32,14 @@
         <ion-item (click)="closeMenuAndNavigate('/all-recipes')">
           <ion-icon slot="start" name="fast-food"></ion-icon>
           <ion-label>All Recipes</ion-label>
+        </ion-item>
+        <ion-item (click)="closeMenuAndNavigate('/mySpace')">
+          <ion-icon slot="start" name="happy-outline"></ion-icon>
+          <ion-label>My Space</ion-label>
+        </ion-item>
+        <ion-item (click)="logout('/login')">
+          <ion-icon slot="start" name="log-out"></ion-icon>
+          <ion-label>Logout</ion-label>
         </ion-item>
       </ion-list>
     </ion-content>
