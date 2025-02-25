@@ -111,3 +111,7 @@ Add your Android package name (e.g., com.yourapp.name).
 Download the updated google-services.json file.  
 Place google-services.json inside android/app/ folder.  
 
+
+  run   
+  ionic capacitor run android -l --external
+
