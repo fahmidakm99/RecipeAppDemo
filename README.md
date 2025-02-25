@@ -81,3 +81,14 @@ Ionic Cordova prepare
 . ionic cordova platforms add/rm android/ios/browser ( to add or remove platform for which builds should be generated)
 . After adding platform if there is issue with any plugin or we want to add new plugin  ionic cordova plugin add/rm <plugin name> <plugin variables>
 
+
+# Google signin in android 
+|Install Required Plugins for Android
+Ensure you have the required Cordova or Capacitor plugin installed for Firebase authentication:
+
+
+npm install cordova-plugin-googleplus          
+npm install @awesome-cordova-plugins/googleplus          
+Or, if using Capacitor:        
+npm install @codetrix-studio/capacitor-google-auth        
+npx cap sync
