@@ -75,16 +75,62 @@ export class LoginPage {
   
 
   // Google Login
+  // async googleLogin() {
+  //   const provider = new firebase.auth.GoogleAuthProvider();
+  //   this.afAuth.signInWithPopup(provider)
+  //     .then(() => {
+  //       this.navCtrl.navigateRoot('/home'); // Redirect after login
+  //     })
+  //     .catch(error => {
+  //       this.showAlert('Error', error.message);
+  //     });
+  // }
+  // async googleLogin() {
+  //   try {
+  //     const provider = new firebase.auth.GoogleAuthProvider();
+  //     await this.afAuth.signInWithRedirect(provider);
+  //     await this.afAuth.getRedirectResult();
+  //     this.navCtrl.navigateRoot('/home'); // Redirect after login
+  //   } catch (error:any) {
+  //     this.showAlert('Error', error.message);
+  //   }
+  // }
   async googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    this.afAuth.signInWithPopup(provider)
-      .then(() => {
-        this.navCtrl.navigateRoot('/home'); // Redirect after login
-      })
-      .catch(error => {
+  
+    if (this.isWebPlatform()) {
+      // Web-based authentication (for browsers)
+      try {
+        const result = await this.afAuth.signInWithPopup(provider);
+        if (result?.user) {
+          console.log('Web Login Successful:', result.user);
+          this.navCtrl.navigateRoot('/home');
+        }
+      } catch (error: any) {
+        console.error('Web Login Error:', error);
         this.showAlert('Error', error.message);
-      });
+      }
+    } else {
+      // Mobile-based authentication (for Android/iOS)
+      try {
+        await this.afAuth.signInWithRedirect(provider);
+        const result = await this.afAuth.getRedirectResult();
+        if (result?.user) {
+          console.log('Mobile Login Successful:', result.user);
+          this.navCtrl.navigateRoot('/home');
+        }
+      } catch (error: any) {
+        console.error('Mobile Login Error:', error);
+        this.showAlert('Error', error.message);
+      }
+    }
   }
+  
+  // Helper function to detect web vs mobile
+  isWebPlatform(): boolean {
+    return !('cordova' in window || 'Capacitor' in window);
+  }
+  
 
   // Helper Function: Show Alert
   async showAlert(header: string, message: string) {
