@@ -92,3 +92,12 @@ npm install @awesome-cordova-plugins/googleplus
 Or, if using Capacitor:        
 npm install @codetrix-studio/capacitor-google-auth        
 npx cap sync
+
+# Configure Firebase for Android  
+Go to Firebase Console → Open your project.  
+Go to Authentication → Sign-in method → Enable "Google Sign-In."  
+Go to Project Settings → General  
+Add your Android package name (e.g., com.yourapp.name).  
+Download the updated google-services.json file.  
+Place google-services.json inside android/app/ folder.  
+
