@@ -63,7 +63,17 @@
 <img width="1481" alt="Screenshot 2024-12-24 at 11 26 07 PM" src="https://github.com/user-attachments/assets/c3b186fd-fa21-4c99-a056-826c1caaecb3" />
 <img width="1268" alt="Screenshot 2025-01-08 at 7 48 18 PM" src="https://github.com/user-attachments/assets/f1e59e63-7939-43ae-a6b4-658c0e37b54f" />
 
-#some commands
+# some extra changes
+<img width="412" alt="Screenshot 2025-02-25 at 10 32 03 AM" src="https://github.com/user-attachments/assets/46b008f9-3961-4ac9-8d3f-cb9c7af672c5" />
+<img width="742" alt="Screenshot 2025-02-25 at 10 32 19 AM" src="https://github.com/user-attachments/assets/7df13851-40dc-43a5-abf6-f57eaec3bc30" />
+<img width="378" alt="Screenshot 2025-02-25 at 10 32 49 AM" src="https://github.com/user-attachments/assets/f68f222b-6e26-4b6d-838f-fb43a25f9db8" />
+
+<img width="396" alt="Screenshot 2025-02-25 at 10 34 22 AM" src="https://github.com/user-attachments/assets/8a171d1b-4b3c-4527-b497-c50ae6f797f8" />
+<img width="383" alt="Screenshot 2025-02-25 at 10 33 27 AM" src="https://github.com/user-attachments/assets/4777fd54-d684-4529-b1ac-1c5f6d7c473d" />
+<img width="390" alt="Screenshot 2025-02-25 at 10 33 12 AM" src="https://github.com/user-attachments/assets/a546a671-b476-4812-bce6-b59530b1721d" />
+<img width="391" alt="Screenshot 2025-02-25 at 10 33 00 AM" src="https://github.com/user-attachments/assets/b0ce1377-6acb-4c46-ad50-e7ed1127a54f" />
+
+# some commands
 
 ionic capacitor open android  
 ionic capacitor run android  
