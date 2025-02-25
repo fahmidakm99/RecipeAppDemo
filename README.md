@@ -65,21 +65,21 @@
 
 #some commands
 
-ionic capacitor open android
-ionic capacitor run android
-adb devices
-ionic capacitor run android --target=emulator-5554
-ionic capacitor build android
-emulator -list-avds 
+ionic capacitor open android  
+ionic capacitor run android  
+adb devices  
+ionic capacitor run android --target=emulator-5554  
+ionic capacitor build android  
+emulator -list-avds     
 
-Rm and add platforms for iOS
-Ionic Cordova prepare
+Rm and add platforms for iOS    
+Ionic Cordova prepare    
 
-. npm cache clean --force (delete node modules and run this command for any errors with node modules installation)
-. npm rebuild node-sass --force (for node sass related error)
-. ionic cordova prepare : to copy the assets for each platform
-. ionic cordova platforms add/rm android/ios/browser ( to add or remove platform for which builds should be generated)
-. After adding platform if there is issue with any plugin or we want to add new plugin  ionic cordova plugin add/rm <plugin name> <plugin variables>
+. npm cache clean --force (delete node modules and run this command for any errors with node modules installation)  
+. npm rebuild node-sass --force (for node sass related error)  
+. ionic cordova prepare : to copy the assets for each platform  
+. ionic cordova platforms add/rm android/ios/browser ( to add or remove platform for which builds should be generated)  
+. After adding platform if there is issue with any plugin or we want to add new plugin  ionic cordova plugin add/rm <plugin name> <plugin variables>  
 
 
 # Google signin in android 
