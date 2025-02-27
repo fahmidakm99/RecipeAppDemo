@@ -119,5 +119,6 @@ Place google-services.json inside android/app/ folder.
 https://www.npmjs.com/package/@codetrix-studio/capacitor-google-auth#migration-guide  
 https://www.youtube.com/watch?v=_BmbLZdJks8  
 npm i --save @codetrix-studio/capacitor-google-auth  
+npx cap update  
 
 
