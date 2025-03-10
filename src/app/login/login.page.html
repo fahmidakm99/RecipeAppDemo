@@ -1,25 +1,4 @@
-<!-- <ion-header>
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content class="ion-padding">
-  <form (ngSubmit)="onLogin()">
-    <ion-item>
-      <ion-label position="floating">Username</ion-label>
-      <ion-input [(ngModel)]="username" name="username" required></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Password</ion-label>
-      <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
-    </ion-item>
-    <ion-button class="login" expand="block" type="submit">Login</ion-button>
-  </form>
-</ion-content> -->
-<!-- Normal Login -->
-<ion-content class="ion-padding login-container">
-  <!-- Logo at the Top -->
+<!-- <ion-content class="ion-padding login-container">
   <div class="logo-container">
     <img
       src="assets/images/recipe-logo.png"
@@ -28,35 +7,56 @@
     />
   </div>
 
+  <h1 class="app-title">Recipe App</h1>
+  <p class="subtitle">Let's get started!</p>
+
+   <ion-card class="login-card">
+    <ion-card-content>
+     
+      <ion-button expand="full" class="continue-button" *ngIf="showPasswordInput" (click)="login()">Login</ion-button>
+
+      <div class="or-divider"><span>OR</span></div>
+
+      <ion-button expand="full" color="dark" (click)="googleLogin()" class="google-button"> -->
+        <!-- <ion-button expand="full" color="dark" (click)="signInWithGoogle()" class="google-button"> -->
+        <!-- <ion-icon slot="start" name="logo-google"></ion-icon> Sign in with Google
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content> -->
+
+
+<ion-content class="ion-padding login-container">
+  <!-- Logo at the Top -->
+  <div class="logo-container">
+    <img src="assets/images/recipe-logo.png" alt="Recipe App Logo" class="app-logo" />
+  </div>
+
   <!-- App Name -->
   <h1 class="app-title">Recipe App</h1>
   <p class="subtitle">Let's get started!</p>
 
   <!-- Login Form -->
-   <!-- Login Form -->
-   <ion-card class="login-card">
+  <ion-card class="login-card">
     <ion-card-content>
-      <!-- Username Input -->
-     
-      <!-- Login Button (Only Visible If Password Field Is Shown) -->
-      <ion-button expand="full" class="continue-button" *ngIf="showPasswordInput" (click)="login()">Login</ion-button>
+      <form (ngSubmit)="loginUser(email, password)">
+        <!-- Email Input -->
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input [(ngModel)]="email" type="email" name="email" required></ion-input>
+        </ion-item>
 
-    
-      <!-- OR Divider -->
-      <div class="or-divider"><span>OR</span></div>
+        <!-- Password Input -->
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input [(ngModel)]="password" type="password" name="password" required></ion-input>
+        </ion-item>
 
-      <!-- Google Sign-In Button -->
-      <ion-button expand="full" color="dark" (click)="googleLogin()" class="google-button">
-        <ion-icon slot="start" name="logo-google"></ion-icon> Sign in with Google
-      </ion-button>
+        <!-- Login Button -->
+        <ion-button class="custom-login-button" expand="full" type="submit">Login</ion-button>
+        <p>Don't have an account? <a routerLink="/register">Register</a></p>
+
+      </form>
     </ion-card-content>
   </ion-card>
 </ion-content>
-
-<!-- <ion-content class="ion-padding">
-
-  <ion-button expand="full" color="primary" (click)="googleLogin()">
-    <ion-icon slot="start" name="logo-google"></ion-icon>
-    Sign in with Google
-  </ion-button>
-</ion-content> -->
