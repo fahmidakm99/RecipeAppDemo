@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { importProvidersFrom, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,10 +7,11 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { RecipieService } from './recipie.service';
+import { RecipieService } from './service/recipie.service';
 import { MealPlannerModalComponent } from './my-space/mealplanner-modal.component';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 
 const firebaseConfig = {
@@ -34,6 +35,10 @@ const firebaseConfig = {
     HttpClientModule,
     IonicStorageModule.forRoot(), 
     MealPlannerModalComponent,
+    ReactiveFormsModule,
+    AngularFireAuthModule, // ✅ Firebase Auth Module
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFirestoreModule, // ✅ Firestore Module
   ],
   providers: [RecipieService, AuthService],
   bootstrap: [AppComponent],
