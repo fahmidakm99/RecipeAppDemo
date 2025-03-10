@@ -20,9 +20,21 @@
 //   }
 // }
 import { Component } from '@angular/core';
-import { NavController, LoadingController, AlertController } from '@ionic/angular';
+import {
+  NavController,
+  LoadingController,
+  AlertController,
+  Platform,
+} from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import {
+  Auth,
+  signInWithCredential,
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+} from '@angular/fire/auth';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 @Component({
   selector: 'app-login',
@@ -44,10 +56,27 @@ export class LoginPage {
     private afAuth: AngularFireAuth,
     private navCtrl: NavController,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController
-  ) {}
+    private alertCtrl: AlertController,
+    private platform: Platform
+  ) // private auth: Auth
+  {
+    // Initialize Google Auth only for web
+    // if (this.platform.is('capacitor')) {
+    //   GoogleAuth.initialize();
+    // }
+  }
+  // async signInWithGoogle() {
+  //   try {
+  //     const googleUser = await GoogleAuth.signIn();
+  //     const credential = GoogleAuthProvider.credential(googleUser.authentication.idToken);
 
-  
+  //     // Sign in with Firebase
+  //     const userCredential = await signInWithCredential(this.auth, credential);
+  //     console.log('User signed in:', userCredential.user);
+  //   } catch (error) {
+  //     console.error('Google Sign-In Error:', error);
+  //   }
+  // }
 
   // Login with Email & Password
   async login() {
@@ -72,32 +101,13 @@ export class LoginPage {
     }
   }
 
-  
+  loginUser(email: string, password: string) {
+    return this.afAuth.signInWithEmailAndPassword(email, password);
+  }
 
-  // Google Login
-  // async googleLogin() {
-  //   const provider = new firebase.auth.GoogleAuthProvider();
-  //   this.afAuth.signInWithPopup(provider)
-  //     .then(() => {
-  //       this.navCtrl.navigateRoot('/home'); // Redirect after login
-  //     })
-  //     .catch(error => {
-  //       this.showAlert('Error', error.message);
-  //     });
-  // }
-  // async googleLogin() {
-  //   try {
-  //     const provider = new firebase.auth.GoogleAuthProvider();
-  //     await this.afAuth.signInWithRedirect(provider);
-  //     await this.afAuth.getRedirectResult();
-  //     this.navCtrl.navigateRoot('/home'); // Redirect after login
-  //   } catch (error:any) {
-  //     this.showAlert('Error', error.message);
-  //   }
-  // }
   async googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();
-  
+
     if (this.isWebPlatform()) {
       // Web-based authentication (for browsers)
       try {
@@ -125,19 +135,18 @@ export class LoginPage {
       }
     }
   }
-  
+
   // Helper function to detect web vs mobile
   isWebPlatform(): boolean {
     return !('cordova' in window || 'Capacitor' in window);
   }
-  
 
   // Helper Function: Show Alert
   async showAlert(header: string, message: string) {
     const alert = await this.alertCtrl.create({
       header,
       message,
-      buttons: ['OK']
+      buttons: ['OK'],
     });
     await alert.present();
   }
