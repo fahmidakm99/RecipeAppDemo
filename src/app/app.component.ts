@@ -24,7 +24,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuController, Platform } from '@ionic/angular'; // ✅ Import MenuController
-import { AuthService } from './auth.service';
+import { AuthService } from './service/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -42,13 +42,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Checking user login status...");
+    console.log('Checking user login status...');
     this.authService.checkUserLoginStatus();
   }
 
   // ✅ Ensure the menu closes before navigating
   closeMenuAndNavigate(route: string) {
-    this.menuController.close().then(() => { // ✅ Ensure menu closes before navigation
+    this.menuController.close().then(() => {
+      // ✅ Ensure menu closes before navigation
       this.router.navigateByUrl(route);
     });
   }
@@ -57,7 +58,7 @@ export class AppComponent implements OnInit {
   initializeBackButton() {
     this.platform.backButton.subscribeWithPriority(10, () => {
       if (this.router.url === '/tabs/home') {
-        console.log("🔹 Back button disabled on home page");
+        console.log('🔹 Back button disabled on home page');
       } else {
         window.history.back(); // Allow normal back behavior
       }
@@ -65,7 +66,8 @@ export class AppComponent implements OnInit {
   }
   logout(route: string) {
     this.authService.logout();
-    this.menuController.close().then(() => { // ✅ Ensure menu closes before navigation
+    this.menuController.close().then(() => {
+      // ✅ Ensure menu closes before navigation
       this.router.navigateByUrl(route);
     });
   }
