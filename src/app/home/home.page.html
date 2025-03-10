@@ -1,0 +1,108 @@
+<ion-header class="custom-header">
+  <ion-toolbar class="toolbar">
+    <!-- Menu Button -->
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title class="title">RECIPE APP</ion-title>
+
+    <!-- Favorites Icon -->
+    <ion-buttons slot="end">
+      <!-- <ion-button (click)="goToFavorites()">
+        <ion-icon slot="icon-only" name="heart"></ion-icon>
+      </ion-button> -->
+
+      <ion-button (click)="goToMySpace()">
+        <ion-icon slot="icon-only" name="happy-outline"></ion-icon>
+        <!-- <img src="assets/images/meal palnner.svg" alt="Logo" class="logo" /> -->
+      </ion-button>
+
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    
+  </ion-toolbar>
+  <div class="user-fullname">
+    <p>{{ getGreeting() }}, {{ getFormattedName() }}!<br>
+      It's time for <span class="food-text">"{{ getFood() }}"</span>
+    </p>
+  </div>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+
+  <!-- Refresher Component -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" refreshingSpinner="crescent">
+    </ion-refresher-content>
+  </ion-refresher>
+  <!-- <div class="user-fullname">
+    <p>{{ getGreeting() }}, {{ getFormattedName() }}!<br>
+      It's time for <span class="food-text">"{{ getFood() }}"</span>
+    </p>
+  </div> -->
+<!-- Empty State -->
+<div class="empty-container" *ngIf="recipes.length === 0">
+  <!-- <ion-card class="recipiecard"> -->
+  <img src="/assets/images/empty.png" alt="No Recipes" class="empty-image" />
+<!-- </ion-card> -->
+</div>
+
+<div *ngIf="recipes.length > 0" class="dish-title">Your Dishes</div>
+  <!-- Swiper Carousel -->
+  <div class="custom-slider">
+    <div class="slides" [ngStyle]="{'transform': 'translateX(' + slideIndex * -100 + '%)'}">
+      <div class="slide" *ngFor="let recipe of recipes" (click)="openRecipe(recipe.id)">
+        <ion-card class="recipiecard">
+          <ion-img class="imagesize" [src]="recipe.image"></ion-img>
+          <div class="cardcontent">
+            <ion-card-header>
+              <ion-card-title class="recipieheading">{{ recipe.name }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content> {{ recipe.description }} </ion-card-content>
+          </div>
+        </ion-card>
+      </div>
+    </div>
+
+
+
+
+    <div class="slide-buttons" *ngIf="recipes.length > 1">
+      <button class="prev" (click)="prevSlide()">&lt;</button>
+      <button class="nxt" (click)="nextSlide()">&gt;</button>
+    </div>
+  </div>
+
+  <div class="quotes-container">
+    <div class="quotes">{{ currentQuote }}</div>
+  </div>
+  <!-- <br /><br /> -->
+  <ion-row class="button-container addall">
+    <ion-col class="button-col">
+      <ion-button class="add-recipe-button" expand="block" (click)="addRecipe()">
+        <ion-icon name="add-circle"></ion-icon>
+        Add Recipe</ion-button>
+    </ion-col>
+    <ion-col class="button-col">
+      <ion-button class="all-recipe-button" expand="block" (click)="allRecipes()">
+        <ion-icon name="fast-food"></ion-icon>
+        All Recipes</ion-button>
+    </ion-col>
+  </ion-row>
+  <ion-row class="button-container addall">
+    <ion-col class="button-col">
+      <ion-button class="add-recipe-button" expand="block" (click)="goToMySpaceSegment('mealPlanner')">
+        <ion-icon name="receipt-outline"></ion-icon>
+        Meal Planner</ion-button>
+    </ion-col>
+    <ion-col class="button-col">
+      <ion-button class="all-recipe-button" expand="block" (click)="goToMySpaceSegment('recipeCommunity')">
+        <ion-icon name="globe-outline"></ion-icon>
+        Recipe Community</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-content>
