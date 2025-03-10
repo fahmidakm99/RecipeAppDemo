@@ -195,17 +195,64 @@ export class EditRecipePage implements OnInit {
     this.router.navigate(['/home']);
   }
 
+  // onImageChange(event: any): void {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       this.image = reader.result; // This will store the image as base64
+  //     };
+  //     reader.readAsDataURL(file); // Convert the image to base64
+  //   }
+  // }
+
   onImageChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = () => {
-        this.image = reader.result; // This will store the image as base64
+      reader.onload = (e: any) => {
+        this.compressImage(e.target.result, 0.7, (compressedBase64: string) => {
+          this.image = compressedBase64; // Store compressed base64 image
+        });
       };
-      reader.readAsDataURL(file); // Convert the image to base64
+      reader.readAsDataURL(file);
     }
   }
-
+  
+  compressImage(base64: string, quality: number, callback: (compressedBase64: string) => void) {
+    const img = new Image();
+    img.src = base64;
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+  
+      const MAX_WIDTH = 800; // Adjust width as needed
+      const MAX_HEIGHT = 600; // Adjust height as needed
+  
+      let width = img.width;
+      let height = img.height;
+  
+      // Resize if necessary
+      if (width > MAX_WIDTH || height > MAX_HEIGHT) {
+        if (width / height > MAX_WIDTH / MAX_HEIGHT) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        } else {
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+  
+      canvas.width = width;
+      canvas.height = height;
+      ctx?.drawImage(img, 0, 0, width, height);
+  
+      // Convert to compressed base64
+      const compressedBase64 = canvas.toDataURL('image/jpeg', quality); // Adjust quality (0.0 - 1.0)
+      callback(compressedBase64);
+    };
+  }
+  
   removeImage(): void {
     this.image = null;
 }
