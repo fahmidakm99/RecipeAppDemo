@@ -12,7 +12,7 @@
 .monthly-button,
 .weekly-button {
   --background: var(--primary-color);
-  color: #fff;
+  color: var(--white);
   flex: 1;
   margin: 0 10px;
   font-size: small;
@@ -27,12 +27,13 @@
 }
 
 .add-item-button {
-  --background: #64b000;
-  color: #fff;
+  --background: var(--green);
+  color: var(--white);
   padding-right: 15px;
   font-size: small;
   font-family: system-ui;
 }
+
 .items {
   font-family: system-ui;
 }
