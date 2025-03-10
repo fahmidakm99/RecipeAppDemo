@@ -45,15 +45,15 @@
     </p>
   </div> -->
 <!-- Empty State -->
-<div class="empty-container" *ngIf="recipes.length === 0">
+<div class="empty-container" *ngIf="recipes.length === 0" [hidden]="recipes.length > 0">
   <!-- <ion-card class="recipiecard"> -->
   <img src="/assets/images/empty.png" alt="No Recipes" class="empty-image" />
 <!-- </ion-card> -->
 </div>
 
-<div *ngIf="recipes.length > 0" class="dish-title">Your Dishes</div>
+<div *ngIf="recipes.length > 0" [hidden]="recipes.length === 0" class="dish-title" >Your Dishes</div>
   <!-- Swiper Carousel -->
-  <div class="custom-slider">
+  <div class="custom-slider" [hidden]="recipes.length === 0">
     <div class="slides" [ngStyle]="{'transform': 'translateX(' + slideIndex * -100 + '%)'}">
       <div class="slide" *ngFor="let recipe of recipes" (click)="openRecipe(recipe.id)">
         <ion-card class="recipiecard">
@@ -71,7 +71,7 @@
 
 
 
-    <div class="slide-buttons" *ngIf="recipes.length > 1">
+    <div class="slide-buttons" *ngIf="recipes.length > 1" [hidden]="recipes.length <= 1">
       <button class="prev" (click)="prevSlide()">&lt;</button>
       <button class="nxt" (click)="nextSlide()">&gt;</button>
     </div>
