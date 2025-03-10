@@ -77,6 +77,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth.guard'; // Import the Auth Guard
+import { RegisterPage } from './register/register.page';
 
 const routes: Routes = [
   {
@@ -89,6 +90,7 @@ const routes: Routes = [
     loadChildren: () =>
       import('./login/login.module').then((m) => m.LoginPageModule),
   },
+  { path: 'register', component: RegisterPage },
   {
     path: 'home',
     loadChildren: () =>
@@ -96,7 +98,7 @@ const routes: Routes = [
     canActivate: [AuthGuard], // Protect Home Page
   },
   {
-    path: 'mySpace',
+    path: 'my-space',
     loadChildren: () =>
       import('./my-space/my-space.module').then((m) => m.MySpacePageModule),
   },
@@ -142,6 +144,14 @@ const routes: Routes = [
       import('./single-recipie-info/single-recipie-info.module').then(
         (m) => m.SingleRecipieInfoPageModule
       ),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'single-recipie-info-public/:id',
+    loadChildren: () =>
+      import(
+        './single-recipie-info-public/single-recipie-info-public.module'
+      ).then((m) => m.SingleRecipieInfoPublicPageModule),
     canActivate: [AuthGuard],
   },
   {
@@ -191,6 +201,11 @@ const routes: Routes = [
     path: 'my-space',
     loadChildren: () =>
       import('./my-space/my-space.module').then((m) => m.MySpacePageModule),
+  },
+  {
+    path: 'register',
+    loadChildren: () =>
+      import('./register/register.module').then((m) => m.RegisterPageModule),
   },
 ];
 
