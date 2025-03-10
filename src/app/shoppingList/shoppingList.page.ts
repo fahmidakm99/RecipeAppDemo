@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ShoppingListService } from '../shopping-list-service.service';
+import { ShoppingListService } from '../service/shopping-list-service.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -38,7 +38,6 @@ export class ShoppingListPage {
       event.target.complete(); // Stop the refresher
     }, 2000);
   }
-  
   removeFromShoppingList(ingredient: any) {
     this.shoppingListService.removeFromList(ingredient);
   }
