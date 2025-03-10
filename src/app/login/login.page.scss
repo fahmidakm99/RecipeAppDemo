@@ -15,7 +15,7 @@
   font-weight: bold;
   margin: 5px 0;
   text-align: center;
-  color: white;
+  color: var(--white);
 }
 
 .subtitle {
@@ -64,7 +64,7 @@
   margin-top: 20px;
   --border-radius: 10px;
   border-radius: 10px !important;
-  --background:var(--primary-color);
+  --background: var(--primary-color);
   overflow: hidden;
 }
 
@@ -80,6 +80,7 @@
 ion-button::part(native) {
   border-radius: 10px !important;
 }
+
 /* Email Input */
 .email-box {
   width: 100%;
@@ -87,7 +88,18 @@ ion-button::part(native) {
   border-radius: 8px;
   padding: 12px;
 }
+
 .email-item {
   width: 110%;
   right: 13px;
+}
+
+a {
+  color: var(--primary-color);
+}
+
+.custom-login-button {
+  --background: var(--primary-color);
+  --color: var(--white);
+
 }
