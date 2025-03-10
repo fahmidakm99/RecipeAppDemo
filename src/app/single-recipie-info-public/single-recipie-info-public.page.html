@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <!-- <ion-back-button defaultHref="/all-recipes"></ion-back-button> -->
+      <ion-back-button defaultHref="" (click)="goBack()" ></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ recipe?.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+
+    <ion-card-header>
+      <div class="title-container">
+        <ion-card-title>{{ recipe?.name }}</ion-card-title>
+      </div>
+    </ion-card-header>
+
+    <!-- Recipe Image -->
+    <ion-card-content>
+      <ion-img [src]="recipe?.image || 'assets/images/default.jpeg'" alt="Recipe Image"></ion-img>
+    </ion-card-content>
+
+    <!-- Categories -->
+    <ion-card-header>
+      <ion-card-subtitle>Categories: {{ recipe?.category?.join(', ') }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <!-- Ingredients Section -->
+    <ion-card-header>
+      <ion-card-title>Ingredients</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list *ngIf="recipe?.ingredients && recipe.ingredients.length">
+        <ion-item *ngFor="let ingredient of recipe.ingredients">
+          <ion-label>{{ ingredient.name }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+    <!-- Preparation Section -->
+    <ion-card-header>
+      <ion-card-title>Preparation</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p class="preparation-text">{{ recipe?.preparation }}</p>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

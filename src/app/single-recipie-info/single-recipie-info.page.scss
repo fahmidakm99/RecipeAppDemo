@@ -1,0 +1,28 @@
+.toolbar{
+    // --background: #404040;
+    color: var(--primary-color);
+    
+}
+.preparation-text {
+    white-space: pre-wrap; /* Preserve line breaks and spaces */
+  }
+
+  .card-header {
+    padding-bottom: 0;
+  }
+  
+.title-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .privacy-toggle-btn {
+    font-size: 12px;
+    padding: 4px 8px;
+    height: 24px;
+    --border-radius: 8px;
+    text-transform: capitalize;
+  }
+  
