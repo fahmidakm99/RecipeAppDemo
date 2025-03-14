@@ -15,14 +15,17 @@ export class CategoriesPage {
   idsByCategory: { [key: string]: string[] } = {}; 
 
   categories = [
-    { name: 'Sweets', img: 'assets/images/sweet .jpeg' },
+    { name: 'Breakfast', img: 'assets/images/breakfast.jpeg'},
+    { name: 'Lunch', img: 'assets/images/Lunch.jpeg'},
+    { name: 'Snacks', img: 'assets/images/snacks.jpeg'},
+    { name: 'Dinner', img: 'assets/images/Dinner.jpeg'},
+    { name: 'Bread', img: 'assets/images/Bread.jpeg'},
     { name: 'Curries', img: 'assets/images/curries.jpeg' },
     { name: 'Sadhya', img: 'assets/images/sadhya.jpeg'},
-    { name: 'Rice', img: 'assets/images/rice.jpeg' },
-    { name: 'Breakfast', img: 'assets/images/breakfast.jpeg'},
-    { name: 'Snacks', img: 'assets/images/snacks.jpeg'},
     { name: 'Healthy', img: 'assets/images/health.jpeg'},
+    { name: 'Rice', img: 'assets/images/rice.jpeg' },
     { name: 'Spicy', img: 'assets/images/spicy.jpeg'},
+    { name: 'Sweets', img: 'assets/images/sweet .jpeg' },
     { name: 'Drinks', img: 'assets/images/Drinks.jpeg'},
     { name: 'Pickles', img: 'assets/images/Pickles.jpeg'},
     { name: '5min Recipie', img: 'assets/images/5min.jpeg'},
