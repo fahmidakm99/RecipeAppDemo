@@ -2,7 +2,7 @@
   <ion-toolbar class="toolbar">
     <ion-buttons slot="end">
       <!-- <ion-back-button defaultHref="/tabs/home"></ion-back-button> -->
-       <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+      <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
     </ion-buttons>
     <ion-title>Edit Recipe</ion-title>
 
@@ -14,21 +14,22 @@
 
     <ion-item>
       <ion-label position="stacked">Recipe Image</ion-label>
-      <ion-input  type="file" accept="image/*" (change)="onImageChange($event)"></ion-input>
+      <ion-input type="file" accept="image/*" (change)="onImageChange($event)"></ion-input>
     </ion-item>
     <ion-item *ngIf="image">
       <ion-label position="stacked">Image Preview</ion-label><br>
       <img [src]="image" alt="Image preview" style="width: 100%; height: auto;">
-      <ion-button class="removeimage" (click)="removeImage()">Remove Image <ion-icon name="trash"></ion-icon></ion-button>
+      <ion-button class="removeimage" (click)="removeImage()">Remove Image <ion-icon
+          name="trash"></ion-icon></ion-button>
     </ion-item>
-    
+
     <br>
-    
+
 
     <ion-item>
       <ion-label position="stacked">Recipe Name</ion-label>
       <ion-input type="text" formControlName="name"></ion-input>
- 
+
     </ion-item>
     <br>
 
@@ -41,70 +42,71 @@
     <ion-grid>
       <ion-row>
         <ion-col size="4">
-            <span>Ingredients</span>
+          <span>Ingredients</span>
         </ion-col>
 
 
         <ion-col size="3">
-            <span >Qty</span>
+          <span>Qty</span>
         </ion-col>
 
 
         <ion-col size="3">
-            <span >Unit</span>
+          <span>Unit</span>
         </ion-col>
       </ion-row>
     </ion-grid>
 
     <div formArrayName="ingredients">
       <div *ngFor="let ingredient of ingredients.controls; let i = index" [formGroupName]="i">
-            <ion-grid>
-              <ion-row>
-          
-                <ion-col size="4">
-                  <ion-item>
-       
-                    <ion-input type="text" formControlName="name" ></ion-input>
-                  </ion-item>
-                </ion-col>
-    
-  
-                <ion-col size="3">
-                  <ion-item>
-    
-                    <ion-input type="number" formControlName="quantity" ></ion-input>
-                  </ion-item>
-                </ion-col>
-    
-      
-                <ion-col size="3">
-                  <ion-item>
-     
-                    <ion-select formControlName="unit">
-                      <ion-select-option value="cup">Cup</ion-select-option>
-                      <ion-select-option value="kg">Kg</ion-select-option>
-                      <ion-select-option value="tsp">Tsp</ion-select-option>
-                      <ion-select-option value="pinch">Pinch</ion-select-option>
-                      <ion-select-option value="nos">Nos</ion-select-option>
-                      <ion-select-option value="needed">Needed</ion-select-option>
-                    </ion-select>
-                  </ion-item>
-                </ion-col>
- 
-                <ion-col size="1" class="button-group">
-                  <ion-button fill="clear" class="addIngredient-color" (click)="addIngredient()" size="small">
-                    <ion-icon slot="icon-only" name="add-circle"></ion-icon>
-                  </ion-button>
-                </ion-col>
-                <ion-col size="1" class="button-group">
-            
-                  <ion-button fill="clear" color="danger" (click)="removeIngredient(i)" size="small" *ngIf="ingredients.controls.length > 1">
-                    <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
-                  </ion-button>
-                </ion-col>
+        <ion-grid>
+          <ion-row>
 
-              </ion-row>
-            </ion-grid>
+            <ion-col size="4">
+              <ion-item>
+
+                <ion-input type="text" formControlName="name"></ion-input>
+              </ion-item>
+            </ion-col>
+
+
+            <ion-col size="3">
+              <ion-item>
+
+                <ion-input type="number" formControlName="quantity"></ion-input>
+              </ion-item>
+            </ion-col>
+
+
+            <ion-col size="3">
+              <ion-item>
+
+                <ion-select formControlName="unit">
+                  <ion-select-option value="cup">Cup</ion-select-option>
+                  <ion-select-option value="kg">Kg</ion-select-option>
+                  <ion-select-option value="tsp">Tsp</ion-select-option>
+                  <ion-select-option value="pinch">Pinch</ion-select-option>
+                  <ion-select-option value="nos">Nos</ion-select-option>
+                  <ion-select-option value="needed">Needed</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col size="1" class="button-group">
+              <ion-button fill="clear" class="addIngredient-color" (click)="addIngredient()" size="small">
+                <ion-icon slot="icon-only" name="add-circle"></ion-icon>
+              </ion-button>
+            </ion-col>
+            <ion-col size="1" class="button-group">
+
+              <ion-button fill="clear" color="danger" (click)="removeIngredient(i)" size="small"
+                *ngIf="ingredients.controls.length > 1">
+                <ion-icon slot="icon-only" name="remove-circle"></ion-icon>
+              </ion-button>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
       </div>
     </div>
 
@@ -127,11 +129,12 @@
         <ion-select-option value="Pickles">Pickles</ion-select-option>
       </ion-select>
     </ion-item>
-<br>
+    <br>
 
     <ion-item>
       <ion-label position="stacked">Preparation</ion-label>
-      <ion-textarea formControlName="preparation" placeholder="Write the preparation steps here..." autoGrow="true"></ion-textarea>
+      <ion-textarea formControlName="preparation" placeholder="Write the preparation steps here..."
+        autoGrow="true"></ion-textarea>
     </ion-item>
 
 
@@ -148,6 +151,5 @@
 
   </form>
 
-  
-</ion-content>
 
+</ion-content>
