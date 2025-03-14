@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { RecipieService } from '../service/recipie.service';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-categories',
@@ -13,6 +14,7 @@ export class CategoriesPage {
   namesByCategory: { [key: string]: string[] } = {};
   imagesByCategory: { [key: string]: string[] } = {}; 
   idsByCategory: { [key: string]: string[] } = {}; 
+  userId: string | null = null;
 
   categories = [
     { name: 'Breakfast', img: 'assets/images/breakfast.jpeg'},
@@ -32,7 +34,8 @@ export class CategoriesPage {
   ];
 
   constructor(private router: Router,
-    private recipeService: RecipieService
+    private recipeService: RecipieService,
+    private authService: AuthService
   ) {}
 
   onCategoryClick(category: string) {
@@ -49,9 +52,21 @@ export class CategoriesPage {
     });
   }
   
+  // ngOnInit() {
+  //   this.loadCategorizedRecipes();
+  //   console.log(this.loadCategorizedRecipes());
+  // }
   ngOnInit() {
-    this.loadCategorizedRecipes();
-    console.log(this.loadCategorizedRecipes());
+    // Fetch the logged-in user ID
+    this.authService.getCurrentUser().subscribe((userId) => {
+      if (userId) {
+        this.userId = userId;
+        console.log('Current User ID:', this.userId);
+        this.loadCategorizedRecipes(); // Load categories after getting userId
+      } else {
+        console.log('No user logged in.');
+      }
+    });
   }
 
   ionViewWillEnter() {
@@ -60,8 +75,17 @@ export class CategoriesPage {
 
   
   loadCategorizedRecipes() {
-    this.recipeService.recipes$.subscribe((recipes) => {
+    if (!this.userId) return;
+
+    this.recipeService.getUserRecipes(this.userId).subscribe((recipes) => {
+      if (!recipes || recipes.length === 0) {
+        console.log('No recipes found for this user.');
+        return;
+      }
+
       const groupedRecipes = recipes.reduce((acc: { [category: string]: any[] }, recipe: any) => {
+        if (!recipe.category) return acc; // ✅ Check if category exists
+
         recipe.category.forEach((cat: string) => {
           if (!acc[cat]) acc[cat] = [];
           acc[cat].push({
@@ -69,40 +93,28 @@ export class CategoriesPage {
             isFavorite: this.recipeService.isFavorite(recipe),
           });
         });
-        console.log(acc);
         return acc;
       }, {});
-  
+
       this.categorizedRecipes = groupedRecipes;
-  console.log(groupedRecipes);
 
-      // Store recipe names grouped by category
-      this.namesByCategory = Object.keys(this.categorizedRecipes).reduce((acc: { [key: string]: string[] }, category) => {
-        acc[category] = this.categorizedRecipes[category].map((recipe) => recipe.name);
-        return acc;
-      }, {});
-  
+      // ✅ Store names grouped by category
+      this.namesByCategory = this.transformGroupedData('name');
+      this.imagesByCategory = this.transformGroupedData('image');
+      this.idsByCategory = this.transformGroupedData('id');
+
+      console.log('Categorized Recipes:', this.categorizedRecipes);
       console.log('Recipe Names by Category:', this.namesByCategory);
-  
-      // Store recipe images grouped by category
-      this.imagesByCategory = Object.keys(this.categorizedRecipes).reduce((acc: { [key: string]: string[] }, category) => {
-        acc[category] = this.categorizedRecipes[category].map((recipe) => recipe['image']);
-        return acc;
-      }, {});
-    
       console.log('Recipe Images by Category:', this.imagesByCategory);
-
-      this.idsByCategory = Object.keys(this.categorizedRecipes).reduce((acc: { [key: string]: string[] }, category) => {
-        acc[category] = this.categorizedRecipes[category].map((recipe) => recipe['id']);
-        return acc;
-      }, {});
-    
-      console.log('Recipe Images by Category:', this.idsByCategory);
+      console.log('Recipe IDs by Category:', this.idsByCategory);
     });
-  
-  
-  
   }
-  
 
+  // 🔹 Helper function to extract data by category
+  private transformGroupedData(key: string): { [category: string]: string[] } {
+    return Object.keys(this.categorizedRecipes).reduce((acc: { [key: string]: string[] }, category) => {
+      acc[category] = this.categorizedRecipes[category].map((recipe) => recipe[key] || 'N/A');
+      return acc;
+    }, {});
+  }
 }
