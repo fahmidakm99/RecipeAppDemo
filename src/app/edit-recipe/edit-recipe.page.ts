@@ -92,15 +92,9 @@ export class EditRecipePage implements OnInit {
     }
   }
   goBack() {
-    const previousPage = sessionStorage.getItem('previousPage');
-    if (previousPage) {
-      sessionStorage.removeItem('previousPage'); // Clear after use
-      this.router.navigateByUrl(previousPage);
-    } else {
-      this.location.back();
-    }
+    this.location.back();
   }
-  
+
   createIngredient(): FormGroup {
     return this.fb.group({
       name: ['', Validators.required], // Ingredient name
@@ -120,29 +114,29 @@ export class EditRecipePage implements OnInit {
   removeIngredient(index: number) {
     this.ingredients.removeAt(index);
   }
- 
+
   // onSubmit() {
   //   if (this.recipeForm.invalid) {
   //     console.error('Form is invalid. Please fill all required fields.');
   //     return;
   //   }
-  
+
   //   // Ensure recipeId is not null
-  //   const recipeId = this.recipeId || ''; 
+  //   const recipeId = this.recipeId || '';
   //   if (!recipeId.trim()) {
   //     console.error("Recipe ID is missing. Cannot update the recipe.");
   //     alert("Invalid Recipe ID");
   //     return;
   //   }
-  
+
   //   const updatedRecipe = {
   //     id: recipeId, // Use the safe recipeId
   //     ...this.recipeForm.value, // Get the form data
   //     image: this.image, // Include the image if it exists
   //   };
-  
+
   //   console.log('Submitting updated recipe:', updatedRecipe);
-  
+
   //   // Call the service to update the recipe
   //   this.recipeService.updateEditRecipe(recipeId, updatedRecipe).subscribe(
   //     (response) => {
@@ -163,27 +157,30 @@ export class EditRecipePage implements OnInit {
       console.error('Form is invalid. Please fill all required fields.');
       return;
     }
-  
+
     const recipeId = this.recipeId?.trim(); // Ensure recipeId is valid
     if (!recipeId) {
       console.error('Recipe ID is missing. Cannot update the recipe.');
       alert('Invalid Recipe ID');
       return;
     }
-  
+
     const updatedRecipe = {
       id: recipeId,
       ...this.recipeForm.value,
       image: this.image,
     };
-  
+
     console.log('Submitting updated recipe:', updatedRecipe);
-  
-    this.recipeService.updateEditRecipe(recipeId, updatedRecipe)
+
+    this.recipeService
+      .updateEditRecipe(recipeId, updatedRecipe)
       .then(() => {
         console.log('Recipe updated successfully!');
         alert('Recipe updated successfully!');
-        this.router.navigateByUrl('/recipes').then(() => window.location.reload());
+        this.router
+          .navigateByUrl('/recipes')
+          .then(() => window.location.reload());
       })
       .catch((error) => {
         console.error('Error updating recipe:', error);
@@ -218,20 +215,24 @@ export class EditRecipePage implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-  
-  compressImage(base64: string, quality: number, callback: (compressedBase64: string) => void) {
+
+  compressImage(
+    base64: string,
+    quality: number,
+    callback: (compressedBase64: string) => void
+  ) {
     const img = new Image();
     img.src = base64;
     img.onload = () => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-  
+
       const MAX_WIDTH = 800; // Adjust width as needed
       const MAX_HEIGHT = 600; // Adjust height as needed
-  
+
       let width = img.width;
       let height = img.height;
-  
+
       // Resize if necessary
       if (width > MAX_WIDTH || height > MAX_HEIGHT) {
         if (width / height > MAX_WIDTH / MAX_HEIGHT) {
@@ -242,20 +243,18 @@ export class EditRecipePage implements OnInit {
           height = MAX_HEIGHT;
         }
       }
-  
+
       canvas.width = width;
       canvas.height = height;
       ctx?.drawImage(img, 0, 0, width, height);
-  
+
       // Convert to compressed base64
       const compressedBase64 = canvas.toDataURL('image/jpeg', quality); // Adjust quality (0.0 - 1.0)
       callback(compressedBase64);
     };
   }
-  
+
   removeImage(): void {
     this.image = null;
+  }
 }
-}
-
-
