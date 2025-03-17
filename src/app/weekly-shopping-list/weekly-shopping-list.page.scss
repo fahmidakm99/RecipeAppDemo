@@ -1,0 +1,14 @@
+.add-item-container {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    margin-left: 17px;
+  }
+  
+  .add-item-button {
+    --background: var(--green);
+    color: #fff;
+    padding-right: 15px;
+    font-size: small;
+    font-family: system-ui;
+  }

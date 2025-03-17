@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/shoppingList"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Weekly Shopping List</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of weeklyList">
+      <ion-label>
+        <h2 *ngIf="item?.name">{{ item.name }}</h2><!-- Display the item name -->
+      </ion-label>
+
+      <!-- Remove Button -->
+      <ion-button color="danger" fill="outline" slot="end" (click)="removeFromWeeklyShoppingList(item)">
+        <ion-icon slot="icon-only" name="trash-bin"></ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-item *ngIf="!weeklyList.length" lines="none">
+    <ion-label class="ion-text-center">
+      <h3>No items in the weekly shopping list.</h3>
+    </ion-label>
+  </ion-item>
+
+  <!-- Input for Adding New Items -->
+  <div class="add-item-container">
+    <ion-input [(ngModel)]="newItem" placeholder="Enter item name"></ion-input>
+    <ion-button class="add-item-button" (click)="addNewItem()">Add Item</ion-button>
+  </div>
+</ion-content>
