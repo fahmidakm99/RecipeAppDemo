@@ -1,0 +1,57 @@
+.title{
+    color: var(--primary-color);
+  }
+  .toolbar{
+    // --background: #404040;
+    color: var(--primary-color);
+    
+  }
+  .highlight-day {
+    // background-color: #ffeb3b !important; 
+    font-weight: bold;
+    color: var(--primary-color) !important; /* Purple text */
+    border: 2px solid var(--primary-color); /* Optional: Add a subtle border */
+  }
+  ion-modal {
+    // --width: 90%;
+    // --height: 50%;
+    --border-radius: 12px;
+    --box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    // display: flex;
+    align-items: center;
+    justify-content: center;
+    --background:var(--primary-color);;
+  }
+  .meal-title{
+    color: var(--primary-color);
+    font-weight: 500;
+  }
+  .meal-update{
+    color: var(--primary-color);
+  }
+
+  
+  ion-segment-button {
+  color: var(--secondary-color);
+    transition: all 0.3s ease-in-out;
+  }
+  .section-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--primary-color); /* Primary Ionic blue */
+    text-transform: uppercase;
+    margin: 15px 0;
+    text-align: left;
+    border-left: 4px solid var(--orange); /* Stylish left border */
+    padding-left: 10px;
+  }
+.week{
+  color: var(--primary-color);
+}
+ion-icon {
+  --color: var(--orange); /* Sets icon color to orange */
+}
+
+.expanded-icon {
+  --color: var(--orange-dark); /* Darker shade of orange for expanded state */
+}

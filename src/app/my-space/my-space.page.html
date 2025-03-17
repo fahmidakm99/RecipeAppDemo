@@ -1,0 +1,139 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <!-- Back Button on the Left -->
+    <ion-buttons slot="end">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+
+    <!-- Centered Title -->
+    <ion-title class="title">My Space</ion-title>
+
+    <!-- Menu Button on the Right -->
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- <ion-content [fullscreen]="true" class="ion-padding">
+  <h4 class="meal-title">Meal Planner</h4>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" *ngFor="let day of weekDays">
+        <ion-card [ngClass]="{'highlight-day': day.name === today}">
+          <ion-card-header (click)="toggleDay(day)">
+            <ion-card-title>{{ day.name }}</ion-card-title>
+            <ion-icon [name]="day.expanded ? 'chevron-up' : 'chevron-down'"></ion-icon>
+          </ion-card-header>
+          <ion-card-content *ngIf="day.expanded">
+            <ion-list>
+              <ion-item *ngFor="let meal of mealTypes">
+                <ion-label>
+                  <strong>{{ meal }}</strong>
+                  <p *ngIf="day.meals[meal]">{{ day.meals[meal] }}</p>
+                </ion-label>
+                  <ion-button fill="outline" class="meal-update" (click)="openInlineModal(userId, day.name, meal)">
+                  {{ day.meals[meal] ? 'Edit' : 'Add' }} Meal
+                </ion-button>            
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+<ion-content [fullscreen]="true" class="ion-padding">
+
+  <!-- Segments -->
+  <ion-segment [(ngModel)]="selectedSegment">
+    <ion-segment-button value="mealPlanner">
+      <ion-label>Meal Planner</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="recipeCommunity">
+      <ion-label>Recipe Community</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Meal Planner Section -->
+  <div *ngIf="selectedSegment === 'mealPlanner'">
+    <!-- <h4 class="meal-title">Meal Planner</h4> -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" size-md="6" *ngFor="let day of weekDays">
+          <ion-card [ngClass]="{'highlight-day': day.name === today}">
+            <ion-card-header (click)="toggleDay(day)">
+              <ion-card-title class="week">{{ day.name }}</ion-card-title>
+              <ion-icon [name]="day.expanded ? 'chevron-up' : 'chevron-down'"></ion-icon>
+            </ion-card-header>
+            <ion-card-content *ngIf="day.expanded">
+              <ion-list>
+                <ion-item *ngFor="let meal of mealTypes">
+                  <ion-label>
+                    <strong>{{ meal }}</strong>
+                    <p *ngIf="day.meals[meal]">{{ day.meals[meal] }}</p>
+                  </ion-label>
+                  <ion-button color="tertiary" fill="outline" class="meal-update" (click)="openInlineModal(userId, day.name, meal)">
+                    {{ day.meals[meal] ? 'Edit' : 'Add' }} Meal
+                  </ion-button>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+
+  <!-- <div *ngIf="selectedSegment === 'recipeCommunity'">
+      <h4 class="meal-title">Recipe Community</h4>
+      <ion-list>
+        <ion-item *ngFor="let recipe of communityRecipes">
+          <ion-label>
+            <h2>{{ recipe.name }}</h2>
+            <p>{{ recipe.description || 'No description available' }}</p>
+          </ion-label>
+          <ion-button fill="outline" color="primary" (click)="viewRecipeDetails(recipe.id)">
+            View
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div> -->
+  <div *ngIf="selectedSegment === 'recipeCommunity'">
+    <!-- <h4 class="meal-title">Recipe Community</h4> -->
+
+    <!-- Other Users' Recipes -->
+    <div *ngIf="otherUsersRecipes.length > 0">
+      <h5 class="section-title">Community</h5>
+      <ion-list>
+        <ion-item *ngFor="let recipe of otherUsersRecipes">
+          <ion-label>
+            <h2>{{ recipe.name }}</h2>
+            <p>{{ recipe.description || 'No description available' }}</p>
+          </ion-label>
+          <ion-button fill="outline" color="tertiary" (click)="viewRecipeDetails(recipe.id)">
+            View
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+    <!-- My Public Recipes -->
+    <div *ngIf="myPublicRecipes.length > 0">
+      <h5 class="section-title">My Contribution</h5>
+      <ion-list>
+        <ion-item *ngFor="let recipe of myPublicRecipes">
+          <ion-label>
+            <h2>{{ recipe.name }}</h2>
+            <p>{{ recipe.description || 'No description available' }}</p>
+          </ion-label>
+          <ion-button fill="outline" color="tertiary" (click)="viewRecipeDetails(recipe.id)">
+            View
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
+
+</ion-content>
