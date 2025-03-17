@@ -108,13 +108,13 @@ export class FavoritesPage implements OnInit {
   }
 
   goBack() {
-    const previousPage = sessionStorage.getItem('previousPage');
-    if (previousPage) {
-      sessionStorage.removeItem('previousPage'); // Clear after use
-      this.router.navigateByUrl(previousPage);
-    } else {
+    // const previousPage = sessionStorage.getItem('previousPage');
+    // if (previousPage) {
+    //   sessionStorage.removeItem('previousPage'); // Clear after use
+    //   this.router.navigateByUrl(previousPage);
+    // } else {
       this.location.back();
-    }
+    // }
   }
   
 
