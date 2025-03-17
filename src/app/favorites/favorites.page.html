@@ -6,19 +6,17 @@
     </ion-buttons>
     <ion-buttons slot="end">
       <!-- <ion-back-button defaultHref="/tabs/home"></ion-back-button> -->
-       <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
+      <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
     </ion-buttons>
     <ion-title>Favorites</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+
   <ion-refresher slot="fixed" (ionRefresh)="refreshFavorites($event)">
-    <ion-refresher-content
-      pullingIcon="chevron-down-circle-outline"
-      refreshingSpinner="crescent"
-    ></ion-refresher-content>
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline"
+      refreshingSpinner="crescent"></ion-refresher-content>
   </ion-refresher>
 
   <ion-list>
