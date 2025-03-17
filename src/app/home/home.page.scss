@@ -1,0 +1,205 @@
+.title {
+  color: var(--white);
+  right: 5px;
+  //ed6f0e //6462df
+}
+
+.imagesize {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+.recipiecard {
+  // background-color: #cccbff;
+  background-color: var(--white);
+  border-radius: 10px;
+}
+
+.cardcontent {
+  // margin: 10px;
+  background-color: var(--white);
+}
+
+.recipieheading {
+  color: var(--primary-color);
+}
+
+/* Container for the buttons */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  /* Space between buttons */
+  gap: 5px;
+  /* Space between buttons */
+}
+
+/* Button styling */
+.add-recipe-button,
+.all-recipe-button {
+  // background: #3880ff; /* Blue background */
+  // --background: var(--third-color);
+  --background: var(--primary-color);
+  color: var(--white);
+  /* White text */
+  border-radius: 8px;
+  /* Rounded corners */
+  font-size: 14px;
+  /* Font size */
+  width: 100%;
+  /* Slightly reduce width to avoid overflow */
+}
+
+.add-recipe-button:hover,
+.all-recipe-button:hover {
+  // background: #4c8dff; /* Lighter blue when hovered */
+  // --background: var(--secondary-color);
+  --background: var(--primary-color);
+}
+
+.button-col {
+  margin: 10px;
+}
+
+.custom-slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  // border-radius: 8px;
+
+}
+
+.slide-buttons {
+  display: flex;
+  justify-content: space-around;
+  /* Add space between buttons */
+  margin-top: 10px;
+  /* Optional: Add spacing above buttons */
+}
+
+.prev,
+.nxt {
+  width: 40px;
+  height: 40px;
+  background-color: var(--third-color);
+  /* Button background */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  /* Make buttons round */
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  /* Optional: Add shadow */
+  position: absolute;
+  /* Position relative to the container */
+  top: 50%;
+  /* Vertically center the buttons */
+  transform: translateY(-50%);
+  /* Adjust for exact centering */
+}
+
+.prev {
+  left: 10px;
+  /* Distance from the left edge of the container */
+}
+
+.nxt {
+  right: 10px;
+  /* Distance from the right edge of the container */
+}
+
+.addall {
+  // bottom: 10%;
+  position: relative;
+}
+
+.quotes-container {
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  /* height: 100vh; */
+  /* background-color: #f9f9f9; */
+  text-align: center;
+  height: 100px;
+}
+
+.quotes {
+  font-size: 20px;
+  /* Adjusted font size for better visibility */
+  font-weight: bold;
+  color: #6c757d;
+  /* Subtle gray color for a refined look */
+  font-family: serif;
+  /* Changed font to a classic style */
+  padding: 20px;
+  max-width: 400px;
+  text-align: left;
+  /* Align text to the left */
+}
+
+.toolbar {
+  // --background: #404040;
+  color: var(--white);
+  height: 50px;
+  --background:var(--primary-color);
+
+}
+.custom-header {
+  overflow: hidden; /* Prevents content from overflowing the rounded corners */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.user-fullname{
+  color: var(--dark-light);
+  padding-right: 3%;
+  padding-left: 4%;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 1px; /* Adjust spacing between letters */
+}
+.food-text{
+  color: var(--green);
+  font-weight: bold;
+}
+.dish-title{
+  color: var(--primary-color);
+  padding-right: 3%;
+  padding-left: 3%;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+.toCommunity{
+  margin: 15px;
+  font-size: smaller;
+}
+.link-text {
+  color: var(--primary-color); /* Ionic primary color */
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.link-text:hover {
+  color: #563973;
+  text-decoration: none;
+}
