@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MySpacePageRoutingModule } from './my-space-routing.module';
 
 import { MySpacePage } from './my-space.page';
+import { FilterModalComponent } from './filter-modal.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { MySpacePage } from './my-space.page';
     IonicModule,
     MySpacePageRoutingModule
   ],
-  declarations: [MySpacePage]
+  declarations: [MySpacePage, FilterModalComponent]
 })
 export class MySpacePageModule {}
