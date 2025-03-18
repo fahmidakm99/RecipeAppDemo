@@ -1,5 +1,42 @@
 # RecipeAppDemo
 
+# Latest Changes
+![meal adding](https://github.com/user-attachments/assets/ceef1aef-084f-4fa5-a93e-ef4f19e79a64)
+![meal planner](https://github.com/user-attachments/assets/ac5da7cb-c0b9-4762-af76-9056937d9340)
+![home](https://github.com/user-attachments/assets/70a61f47-4a80-488e-9006-0a496a820e59)
+![menu](https://github.com/user-attachments/assets/640d6905-944c-476d-9886-62ba64e7d3ba)
+
+![favs](https://github.com/user-attachments/assets/5e6408a3-ad3a-4e33-a211-10f68da96742)
+![all recipes](https://github.com/user-attachments/assets/4f0af708-02eb-4e50-8f19-736f58113489)
+![add recipe](https://github.com/user-attachments/assets/b6a406df-2c4a-437b-a0d1-15472f415270)
+
+![edit 1](https://github.com/user-attachments/assets/af6c6162-385f-4ed9-8a3e-c2a86ef4bfb3)
+![edit 2](https://github.com/user-attachments/assets/8ac30a26-76ad-413c-af3b-1287fdf50b4c)
+![edit 3](https://github.com/user-attachments/assets/664c1792-fc27-4b73-9d12-8ce117711b68)
+
+![recipe community page](https://github.com/user-attachments/assets/62dcbe62-53d0-4175-97d8-232c2857a0d7)
+![search in recipe community](https://github.com/user-attachments/assets/568a3f97-8bfc-4480-bad7-33ccd8e383c6)
+![filter by sort](https://github.com/user-attachments/assets/9f620a20-8d73-45c6-9e27-2334946d1767)
+![filter by prep time](https://github.com/user-attachments/assets/d7499510-40ce-498e-a88e-77293b0581e3)
+![filter by category](https://github.com/user-attachments/assets/d1789810-4b0b-42a9-ab22-5086065fe206)
+
+![recipe community filter](https://github.com/user-attachments/assets/08dd2bd3-1b80-420c-9420-80e75c66e217)
+![sort ztoa](https://github.com/user-attachments/assets/7f91055e-f609-4070-8e3c-b9ba3e2add9b)
+
+![my contribution 2](https://github.com/user-attachments/assets/4afc157b-7654-4f53-bc91-94118144cd07)
+![my contribution](https://github.com/user-attachments/assets/6b21cb1e-423a-401e-902d-3b1fb88cc20e)
+![community recipe](https://github.com/user-attachments/assets/3f8a7a26-fac5-4d23-9c60-467bce62e037)
+![community recipes](https://github.com/user-attachments/assets/b17649c3-182a-4fa0-889b-0572d6328fe9)
+
+![shoppinglist](https://github.com/user-attachments/assets/9c73b968-6a0e-4724-908d-e1ab91a35172)
+![monthly shopping list](https://github.com/user-attachments/assets/fa5d87c3-649d-40f0-9b20-46b944d1ab80)
+![weeklyshoppinglist](https://github.com/user-attachments/assets/5f9b0467-873d-4fb6-9b06-ea4338554ecd)
+
+![categories](https://github.com/user-attachments/assets/9826d6bc-b0c7-4802-9292-3b9e74d2e277)
+![catgry search](https://github.com/user-attachments/assets/96b3547c-412f-45c0-8e56-20aa442cb855)
+![categories 2](https://github.com/user-attachments/assets/16e296cc-b42f-4495-adfb-bb61ae640f84)
+![category detail](https://github.com/user-attachments/assets/703821ea-0e81-4b4f-a42e-810ef30f2c7d)
+
 # Home Page 
 <img width="366" alt="Screenshot 2024-12-24 at 2 59 01 PM" src="https://github.com/user-attachments/assets/44a415d5-0e5d-4171-8251-258529be9648" /> 
 <img width="375" alt="Screenshot 2024-12-24 at 2 59 21 PM" src="https://github.com/user-attachments/assets/48337c46-d1b7-4013-ac93-19cde30951e6" />
