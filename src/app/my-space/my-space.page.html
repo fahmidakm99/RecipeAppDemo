@@ -73,7 +73,8 @@
                     <strong>{{ meal }}</strong>
                     <p *ngIf="day.meals[meal]">{{ day.meals[meal] }}</p>
                   </ion-label>
-                  <ion-button color="tertiary" fill="outline" class="meal-update" (click)="openInlineModal(userId, day.name, meal)">
+                  <ion-button color="tertiary" fill="outline" class="meal-update"
+                    (click)="openInlineModal(userId, day.name, meal)">
                     {{ day.meals[meal] ? 'Edit' : 'Add' }} Meal
                   </ion-button>
                 </ion-item>
@@ -100,14 +101,22 @@
         </ion-item>
       </ion-list>
     </div> -->
+  <!-- Recipe Community Section -->
   <div *ngIf="selectedSegment === 'recipeCommunity'">
-    <!-- <h4 class="meal-title">Recipe Community</h4> -->
 
-    <!-- Other Users' Recipes -->
-    <div *ngIf="otherUsersRecipes.length > 0">
+    <!-- Search Bar -->
+    <ion-item>
+      <ion-searchbar placeholder="Search recipes" [(ngModel)]="searchTerm" (ionInput)="filterRecipes()"></ion-searchbar>
+      <ion-button slot="end" fill="outline" (click)="openFilterModal()">
+        <ion-icon name="funnel-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <!-- Other Users' Recipes Section -->
+    <div>
       <h5 class="section-title">Community</h5>
-      <ion-list>
-        <ion-item *ngFor="let recipe of otherUsersRecipes">
+      <ion-list *ngIf="filteredOtherUsersRecipes.length > 0; else noCommunity">
+        <ion-item *ngFor="let recipe of filteredOtherUsersRecipes">
           <ion-label>
             <h2>{{ recipe.name }}</h2>
             <p>{{ recipe.description || 'No description available' }}</p>
@@ -117,12 +126,18 @@
           </ion-button>
         </ion-item>
       </ion-list>
+      <ng-template #noCommunity>
+        <p style="text-align: center; color: gray; margin-top: 1rem;">
+          {{ searchTerm ? 'No community recipes found for "' + searchTerm + '"' : 'No community recipes available' }}
+        </p>
+      </ng-template>
     </div>
-    <!-- My Public Recipes -->
-    <div *ngIf="myPublicRecipes.length > 0">
+
+    <!-- My Public Recipes Section -->
+    <div>
       <h5 class="section-title">My Contribution</h5>
-      <ion-list>
-        <ion-item *ngFor="let recipe of myPublicRecipes">
+      <ion-list *ngIf="filteredMyPublicRecipes.length > 0; else noMyRecipes">
+        <ion-item *ngFor="let recipe of filteredMyPublicRecipes">
           <ion-label>
             <h2>{{ recipe.name }}</h2>
             <p>{{ recipe.description || 'No description available' }}</p>
@@ -132,8 +147,14 @@
           </ion-button>
         </ion-item>
       </ion-list>
+      <ng-template #noMyRecipes>
+        <p style="text-align: center; color: gray; margin-top: 1rem;">
+          {{ searchTerm ? 'No personal recipes found for "' + searchTerm + '"' : 'No personal recipes available' }}
+        </p>
+      </ng-template>
     </div>
 
   </div>
+
 
 </ion-content>
