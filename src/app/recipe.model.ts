@@ -16,5 +16,6 @@ export interface Ingredient {
     imageUrl?: string; // Optional property for recipe image
     favorites: boolean;
     shoppinglist: boolean; 
+    prepTime: number;
   }
   
