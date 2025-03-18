@@ -1,0 +1,117 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Filter By</ion-title>
+      <ion-buttons slot="end">
+        <ion-button class="close-btn" (click)="dismiss()">
+          <ion-icon name="close-circle" slot="start"></ion-icon>
+          </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-list>
+            <ion-item button (click)="selectFilter('category')">
+              <ion-label>Category</ion-label>
+            </ion-item>
+            <ion-item button (click)="selectFilter('sortBy')">
+              <ion-label>Sort By</ion-label>
+            </ion-item>
+            <ion-item button (click)="selectFilter('prepTime')">
+              <ion-label>Prep Time</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+  
+        <ion-col size="6">
+          <!-- Right Panel Content -->
+          <!-- <ng-container *ngIf="selectedFilter === 'category'">
+            <ion-item *ngFor="let category of categories">
+              <ion-label>{{ category }}</ion-label>
+              <ion-checkbox slot="end" [(ngModel)]="selectedCategories[category]"></ion-checkbox>
+            </ion-item>
+            
+          </ng-container> -->
+          <ng-container *ngIf="selectedFilter === 'category'">
+            <ion-item *ngFor="let category of categories">
+              <ion-label>{{ category }}</ion-label>
+              <ion-checkbox 
+                slot="end"
+                [(ngModel)]="selectedCategories[category]" 
+                (ionChange)="onCategoryChange(category)">
+              </ion-checkbox>
+            </ion-item>
+          </ng-container>
+          
+  
+          <ng-container *ngIf="selectedFilter === 'sortBy'">
+            <ion-radio-group [(ngModel)]="currentSort">
+              <ion-item>
+                <ion-label>A to Z</ion-label>
+                <ion-radio slot="end" value="asc"></ion-radio>
+              </ion-item>
+              <ion-item>
+                <ion-label>Z to A</ion-label>
+                <ion-radio slot="end" value="desc"></ion-radio>
+              </ion-item>
+            </ion-radio-group>
+          </ng-container>
+          
+          
+  
+          <ng-container *ngIf="selectedFilter === 'prepTime'">
+            <!-- <ion-item>
+                <ion-range 
+                  [(ngModel)]="prepTimeRangeValues" 
+                  [min]="5" 
+                  [max]="120" 
+                  step="5" 
+                  dualKnobs="true">
+                  <ion-label slot="start">{{ prepTimeRangeValues[0] }} mins</ion-label>
+                  <ion-label slot="end">{{ prepTimeRangeValues[1] }} mins</ion-label>
+                </ion-range>
+              
+            </ion-item> -->
+              <ion-item>
+                <ion-range
+                dualKnobs="true"
+                [min]="0"
+                [max]="120"
+                step="5"
+                [value]="{ lower: prepTimeRange.min, upper: prepTimeRange.max }"
+                (ionChange)="setPrepTimeRange($event)">
+                <ion-label slot="start">{{ prepTimeRange.min }} mins</ion-label>
+                <ion-label slot="end">{{ prepTimeRange.max }} mins</ion-label>
+              </ion-range>
+              
+
+              </ion-item>
+            
+            
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row class="filter-buttons-row">
+        <ion-col size="4">
+          <ion-button expand="block" class="filterbtn clearbtn" (click)="clearAll()">
+            <ion-icon name="refresh-circle-outline"></ion-icon>
+            Clear
+          </ion-button>
+        </ion-col>
+        <ion-col size="8">
+          <ion-button expand="block" class="filterbtn applybtn" (click)="applyFilter()">
+            <ion-icon name="filter" slot="start"></ion-icon>
+            Apply Filter
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+    
+  </ion-content>
+  

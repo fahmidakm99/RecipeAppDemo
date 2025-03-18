@@ -1,0 +1,88 @@
+// filter-modal.component.scss
+
+// :host {
+//     display: block;
+//     height: 100%;
+//   }
+  
+  ion-content {
+    --padding-bottom: 80px; // create space for fixed button
+  }
+  
+  ion-header {
+    ion-toolbar {
+      --background: var(--primary-color);
+      --color: var(--white);
+      ion-title {
+        font-weight: bold;
+      }
+    }
+  }
+  
+  ion-grid {
+    padding: 16px;
+  }
+  
+  ion-segment {
+    margin-bottom: 16px;
+  }
+  
+  ion-label {
+    font-size: 14px;
+  }
+  
+  ion-range {
+    margin-top: 10px;
+  }
+  
+  .fixed-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 12px;
+    background: var(--white);
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  
+    // ion-button {
+    //   width: 100%;
+    // }
+  }
+  // .filterbtn {
+  //   --background: var(--primary-color);
+  //   --color: var(--white);
+  //   font-weight: bold;
+  //   letter-spacing: 0.5px;
+  //   margin: 0 16px;
+  //   margin-bottom: 20px;
+  //   transition: transform 0.2s ease-in-out;
+  
+  //   &:hover {
+  //     transform: scale(1.03);
+  //   }
+  // }
+  .filterbtn {
+    --background: var(--primary-color);
+    --color: var(--white);
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    transition: transform 0.2s ease-in-out;
+    width: 100%;
+  
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+  
+  .clearbtn {
+    --background: var(--ion-color-medium); // softer color for "Clear All"
+  }
+  .close-btn{
+    color: var(--white); // softer color for "Clear All"
+    // background-color: var(--red);
+    // border-radius: 20px;
+  }
+  
+  
+  
