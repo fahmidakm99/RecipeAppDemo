@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ActionSheetController, ModalController } from '@ionic/angular';
 import { MealPlannerModalComponent } from './mealplanner-modal.component';
 import { RecipieService } from '../service/recipie.service';
 import { Auth } from '@angular/fire/auth';
@@ -8,6 +8,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FilterModalComponent } from './filter-modal.component';
+import { Recipe } from '../recipe.model';
 @Component({
   selector: 'app-my-space',
   templateUrl: './my-space.page.html',
@@ -19,6 +21,13 @@ export class MySpacePage {
   newRecipe: string = '';
   showInlineModal = false;
   communityRecipes: any[] = []; // Store fetched recipes
+  searchTerm: string = '';
+
+  // Variables to hold the state
+  // selectedCategories: string[] = [];
+  selectedCategories: { [key: string]: boolean } = {}; // <-- FIXED
+  sortBy: string = '';
+  prepTimeRange: { min: number; max: number } = { min: 0, max: 0 };
 
   weekDays = [
     { name: 'Monday', expanded: false, meals: {} as Record<string, string> },
@@ -46,6 +55,11 @@ export class MySpacePage {
   myPublicRecipes: any[] = []; // Recipes created by the user
   otherUsersRecipes: any[] = []; // Recipes from other users
 
+  combinedRecipes: any[] = []; // New array for combined recipes
+  filteredCombinedRecipes: any[] = []; // Filtered combined array
+  filteredOtherUsersRecipes: any[] = [];
+  filteredMyPublicRecipes: any[] = [];
+
   constructor(
     private modalCtrl: ModalController,
     private recipeService: RecipieService,
@@ -54,14 +68,15 @@ export class MySpacePage {
     private authService: AuthService,
     private firestore: AngularFirestore,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalController: ModalController
   ) {
     this.highlightToday();
     this.getUserIdAndLoadMeals();
     this.fetchCommunityRecipes();
   }
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       if (params['segment']) {
         this.selectedSegment = params['segment']; // Set the segment
       }
@@ -199,7 +214,170 @@ export class MySpacePage {
 
         console.log('My Public Recipes:', this.myPublicRecipes);
         console.log("Other Users' Recipes:", this.otherUsersRecipes);
+        this.filterRecipes();
       });
   }
-  
+  filterRecipes() {
+    const term = this.searchTerm.trim().toLowerCase();
+
+    if (term) {
+      // Filter both arrays separately
+      this.filteredOtherUsersRecipes = this.otherUsersRecipes.filter(
+        (recipe) =>
+          recipe.name.toLowerCase().includes(term) ||
+          (recipe.description &&
+            recipe.description.toLowerCase().includes(term))
+      );
+
+      this.filteredMyPublicRecipes = this.myPublicRecipes.filter(
+        (recipe) =>
+          recipe.name.toLowerCase().includes(term) ||
+          (recipe.description &&
+            recipe.description.toLowerCase().includes(term))
+      );
+    } else {
+      // If no search term, show all
+      this.filteredOtherUsersRecipes = [...this.otherUsersRecipes];
+      this.filteredMyPublicRecipes = [...this.myPublicRecipes];
+    }
+  }
+
+  // async openFilterModal() {
+  //   const modal = await this.modalController.create({
+  //     component: FilterModalComponent,
+  //     componentProps: {
+  //       currentSort: this.sortBy,
+  //       selectedCategories: this.selectedCategories,
+  //       prepTimeRange: this.prepTimeRange
+  //     }
+  //   });
+
+  //   modal.onDidDismiss().then((data) => {
+  //     if (data.data) {
+  //       // Update filters here
+  //       this.sortBy = data.data.sortBy;
+  //       this.selectedCategories = data.data.selectedCategories;
+  //       this.prepTimeRange = data.data.prepTimeRange;
+  //       this.filterRecipes();
+  //     }
+  //   });
+
+  //   await modal.present();
+  // }
+  createCategoryObject(selectedArray: string[]) {
+    const obj: { [key: string]: boolean } = {};
+    selectedArray.forEach((cat) => (obj[cat] = true));
+    return obj;
+  }
+
+  applyFilterLogic() {
+    const selectedCategoriesArray = Object.keys(this.selectedCategories).filter(
+      (cat) => this.selectedCategories[cat]
+    );
+    console.log('Selected Categories:', selectedCategoriesArray);
+
+    const combineRecipes = [...this.otherUsersRecipes, ...this.myPublicRecipes];
+    console.log('Combined Recipes:', combineRecipes);
+
+    // Step 1:  Filter recipes where any category matches selected category
+    let filteredRecipes = combineRecipes;
+    if (selectedCategoriesArray.length > 0) {
+      filteredRecipes = combineRecipes.filter((recipe) =>
+        recipe.category?.some((cat: string) =>
+          selectedCategoriesArray.includes(cat)
+        )
+      );
+    }
+    console.log('Filtered Recipes:', filteredRecipes);
+
+    // Step 2: Sort logic
+    if (this.sortBy) {
+      if (this.sortBy === 'asc') {
+        console.log(this.sortBy);
+        filteredRecipes.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (this.sortBy === 'desc') {
+        filteredRecipes.sort((a, b) => b.name.localeCompare(a.name));
+      }
+    }
+    console.log('Filtered Recipes:', filteredRecipes);
+
+    // Step 3: Filter by prepTimeRange
+    // ✅ Prep Time Range Filter (ACTIVATED NOW)
+    if (this.prepTimeRange) {
+      const { min, max } = this.prepTimeRange;
+      console.log(
+        `Filtering recipes by prep time between ${min} and ${max} mins`
+      );
+
+      filteredRecipes = filteredRecipes.filter((recipe) => {
+        const prepTime = Number(recipe.prepTime) || 0;
+        const isInRange = prepTime >= min && prepTime <= max;
+        console.log(
+          `Recipe: ${recipe.name} - prepTime: ${prepTime} - inRange: ${isInRange}`
+        );
+        return isInRange;
+      });
+    }
+
+    // Optional split into "otherUsers" and "myPublic" buckets
+    this.filteredOtherUsersRecipes = filteredRecipes.filter((recipe) =>
+      this.otherUsersRecipes.includes(recipe)
+    );
+    this.filteredMyPublicRecipes = filteredRecipes.filter((recipe) =>
+      this.myPublicRecipes.includes(recipe)
+    );
+  }
+
+  // async openFilterModal() {
+  //   const modal = await this.modalController.create({
+  //     component: FilterModalComponent,
+  //     componentProps: {
+  //       currentSort: this.sortBy,
+  //       selectedCategories: Object.keys(this.selectedCategories),
+  //       prepTimeRange: this.prepTimeRange,
+  //     },
+  //   });
+
+  //   modal.onDidDismiss().then((result) => {
+  //     if (result.data) {
+  //       const { sortBy, selectedCategories, prepTimeRange } = result.data;
+  //       // this.sortBy = sortBy;
+  //       this.sortBy = result.data.sortBy;
+  //       this.selectedCategories = this.createCategoryObject(selectedCategories);
+  //       this.prepTimeRange = prepTimeRange;
+  //       this.applyFilterLogic();
+  //     }
+  //   });
+
+  //   await modal.present();
+  // }
+  async openFilterModal() {
+    const modal = await this.modalCtrl.create({
+      component: FilterModalComponent,
+      componentProps: {
+        selectedCategories: this.selectedCategories,
+        currentSort: this.sortBy,
+        prepTimeRange: this.prepTimeRange,
+      },
+    });
+
+    modal.onDidDismiss().then((result) => {
+      if (result.data) {
+        this.selectedCategories = this.convertArrayToObj(
+          result.data.selectedCategories
+        );
+        this.sortBy = result.data.sortBy;
+        this.prepTimeRange = result.data.prepTimeRange;
+        this.applyFilterLogic();
+      }
+    });
+
+    await modal.present();
+  }
+
+  convertArrayToObj(selectedArray: string[]): { [key: string]: boolean } {
+    const obj: { [key: string]: boolean } = {};
+    selectedArray.forEach((cat) => (obj[cat] = true));
+    return obj;
+  }
 }
