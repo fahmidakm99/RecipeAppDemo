@@ -37,6 +37,12 @@
 ![categories 2](https://github.com/user-attachments/assets/16e296cc-b42f-4495-adfb-bb61ae640f84)
 ![category detail](https://github.com/user-attachments/assets/703821ea-0e81-4b4f-a42e-810ef30f2c7d)
 
+# fire store
+<img width="1297" alt="Screenshot 2025-03-18 at 9 11 09 AM" src="https://github.com/user-attachments/assets/547f73ae-f255-4ceb-a485-6e080884cc21" />
+<img width="1366" alt="Screenshot 2025-03-18 at 9 11 01 AM" src="https://github.com/user-attachments/assets/0b1b9e3a-9f59-4f0b-99e8-3b8eead15991" />
+<img width="1656" alt="Screenshot 2025-03-18 at 9 10 45 AM" src="https://github.com/user-attachments/assets/9d45475d-0cbf-4490-8e56-de1fdcc1694c" />
+
+
 # Home Page 
 <img width="366" alt="Screenshot 2024-12-24 at 2 59 01 PM" src="https://github.com/user-attachments/assets/44a415d5-0e5d-4171-8251-258529be9648" /> 
 <img width="375" alt="Screenshot 2024-12-24 at 2 59 21 PM" src="https://github.com/user-attachments/assets/48337c46-d1b7-4013-ac93-19cde30951e6" />
