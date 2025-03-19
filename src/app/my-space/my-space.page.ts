@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActionSheetController, ModalController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { MealPlannerModalComponent } from './mealplanner-modal.component';
 import { RecipieService } from '../service/recipie.service';
-import { Auth } from '@angular/fire/auth';
-import { AuthService } from '../service/auth.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FilterModalComponent } from './filter-modal.component';
-import { Recipe } from '../recipe.model';
 @Component({
   selector: 'app-my-space',
   templateUrl: './my-space.page.html',
@@ -65,11 +61,9 @@ export class MySpacePage {
     private recipeService: RecipieService,
     // private auth: Auth,
     private afAuth: AngularFireAuth,
-    private authService: AuthService,
     private firestore: AngularFirestore,
     private router: Router,
-    private route: ActivatedRoute,
-    private modalController: ModalController
+    private route: ActivatedRoute
   ) {
     this.highlightToday();
     this.getUserIdAndLoadMeals();
@@ -162,17 +156,23 @@ export class MySpacePage {
     const { data, role } = await modal.onWillDismiss();
 
     if (role === 'confirm' && data) {
-      console.log('Recipe saved:', data); // ✅ Debugging output
+      console.log('Recipe saved:', data);
 
-      this.weekDays.find((d) => d.name === day)!.meals[meal] = data; // ✅ Store the recipe
-      this.recipeService
-        .saveRecipeToMealPlanner(userId, day, meal, data)
-        .subscribe(); // Save to Firebase
+      // Store locally
+      this.weekDays.find((d) => d.name === day)!.meals[meal] = data;
+
+      // Save to Firebase (await instead of subscribe)
+      await this.recipeService.saveRecipeToMealPlannerFireStore(
+        userId,
+        day,
+        meal,
+        data
+      );
     }
   }
-  // Load saved recipes on app start
+
   loadMealPlan(userId: string) {
-    this.recipeService.getMealplannerRecipes(userId).subscribe((recipes) => {
+    this.recipeService.getMealPlan(userId).subscribe((recipes) => {
       console.log('Fetched meal planner data:', recipes); // ✅ Debugging output
 
       if (recipes.length > 0) {
@@ -188,15 +188,6 @@ export class MySpacePage {
     });
   }
 
-  // fetchCommunityRecipes() {
-  //   this.firestore
-  //     .collection('recipeCommunity')
-  //     .valueChanges({ idField: 'id' })
-  //     .subscribe((recipes) => {
-  //       this.communityRecipes = recipes;
-  //       console.log('Loaded community recipes:', this.communityRecipes);
-  //     });
-  // }
   fetchCommunityRecipes() {
     this.firestore
       .collection('recipeCommunity')
@@ -242,28 +233,6 @@ export class MySpacePage {
     }
   }
 
-  // async openFilterModal() {
-  //   const modal = await this.modalController.create({
-  //     component: FilterModalComponent,
-  //     componentProps: {
-  //       currentSort: this.sortBy,
-  //       selectedCategories: this.selectedCategories,
-  //       prepTimeRange: this.prepTimeRange
-  //     }
-  //   });
-
-  //   modal.onDidDismiss().then((data) => {
-  //     if (data.data) {
-  //       // Update filters here
-  //       this.sortBy = data.data.sortBy;
-  //       this.selectedCategories = data.data.selectedCategories;
-  //       this.prepTimeRange = data.data.prepTimeRange;
-  //       this.filterRecipes();
-  //     }
-  //   });
-
-  //   await modal.present();
-  // }
   createCategoryObject(selectedArray: string[]) {
     const obj: { [key: string]: boolean } = {};
     selectedArray.forEach((cat) => (obj[cat] = true));
@@ -328,29 +297,6 @@ export class MySpacePage {
     );
   }
 
-  // async openFilterModal() {
-  //   const modal = await this.modalController.create({
-  //     component: FilterModalComponent,
-  //     componentProps: {
-  //       currentSort: this.sortBy,
-  //       selectedCategories: Object.keys(this.selectedCategories),
-  //       prepTimeRange: this.prepTimeRange,
-  //     },
-  //   });
-
-  //   modal.onDidDismiss().then((result) => {
-  //     if (result.data) {
-  //       const { sortBy, selectedCategories, prepTimeRange } = result.data;
-  //       // this.sortBy = sortBy;
-  //       this.sortBy = result.data.sortBy;
-  //       this.selectedCategories = this.createCategoryObject(selectedCategories);
-  //       this.prepTimeRange = prepTimeRange;
-  //       this.applyFilterLogic();
-  //     }
-  //   });
-
-  //   await modal.present();
-  // }
   async openFilterModal() {
     const modal = await this.modalCtrl.create({
       component: FilterModalComponent,
