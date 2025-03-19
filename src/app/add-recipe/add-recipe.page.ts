@@ -3,13 +3,14 @@ import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { RecipieService } from '../service/recipie.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-add-recipe',
   templateUrl: './add-recipe.page.html',
   styleUrls: ['./add-recipe.page.scss'],
 })
-
 export class AddRecipePage implements OnInit {
   @ViewChild('fileInput') fileInput!: ElementRef;
 
@@ -17,6 +18,8 @@ export class AddRecipePage implements OnInit {
   image: string | ArrayBuffer | null = null;
   recipeId: string | null = null;
   userId!: string; // Store userId
+  recipeImage: string | undefined;
+  isWeb: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -27,6 +30,7 @@ export class AddRecipePage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isWeb = Capacitor.getPlatform() === 'web';
     this.recipeForm = this.fb.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
@@ -37,7 +41,6 @@ export class AddRecipePage implements OnInit {
       shoppinglist: [],
       prepTime: ['', Validators.required], // Added prep time
       serves: ['', Validators.required], // Added serves
-      
     });
 
     // Get logged-in user ID
@@ -173,20 +176,24 @@ export class AddRecipePage implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-  
-  compressImage(base64: string, quality: number, callback: (compressedBase64: string) => void) {
+
+  compressImage(
+    base64: string,
+    quality: number,
+    callback: (compressedBase64: string) => void
+  ) {
     const img = new Image();
     img.src = base64;
     img.onload = () => {
       const canvas = document.createElement('canvas');
       const ctx = canvas.getContext('2d');
-  
+
       const MAX_WIDTH = 800; // Adjust width as needed
       const MAX_HEIGHT = 600; // Adjust height as needed
-  
+
       let width = img.width;
       let height = img.height;
-  
+
       // Resize if necessary
       if (width > MAX_WIDTH || height > MAX_HEIGHT) {
         if (width / height > MAX_WIDTH / MAX_HEIGHT) {
@@ -197,11 +204,11 @@ export class AddRecipePage implements OnInit {
           height = MAX_HEIGHT;
         }
       }
-  
+
       canvas.width = width;
       canvas.height = height;
       ctx?.drawImage(img, 0, 0, width, height);
-  
+
       // Convert to compressed base64
       const compressedBase64 = canvas.toDataURL('image/jpeg', quality); // Adjust quality (0.0 - 1.0)
       callback(compressedBase64);
@@ -210,4 +217,48 @@ export class AddRecipePage implements OnInit {
   // removeImage(): void {
   //   this.image = null;  // Clears the selected image
   // }
+
+  // async captureFromCamera() {
+  //   try {
+  //     const image = await Camera.getPhoto({
+  //       quality: 70,
+  //       allowEditing: false,
+  //       resultType: CameraResultType.DataUrl,
+  //       source: CameraSource.Camera,
+  //     });
+
+  //     if (image?.dataUrl) {
+  //       this.compressImage(image.dataUrl, 0.7, (compressedBase64: string) => {
+  //         this.image = compressedBase64; // Store compressed image
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error('Camera error:', error);
+  //   }
+  // }
+  // 📷 For Camera Image
+  async captureFromCamera() {
+    if (Capacitor.getPlatform() === 'web') {
+      // Fallback for browser: open file picker
+      this.fileInput.nativeElement.click();
+      return;
+    }
+
+    try {
+      const image = await Camera.getPhoto({
+        quality: 70,
+        allowEditing: false,
+        resultType: CameraResultType.DataUrl, // Base64 URL
+        source: CameraSource.Camera,
+      });
+
+      if (image?.dataUrl) {
+        this.compressImage(image.dataUrl, 0.7, (compressedBase64: string) => {
+          this.image = compressedBase64; // ✅ Store compressed image like gallery upload
+        });
+      }
+    } catch (error) {
+      console.error('Camera error:', error);
+    }
+  }
 }
