@@ -77,47 +77,57 @@ export class RecipieService {
   //   );
   //   // return this.http.post(`${this.mealplannerUrl}/${userId}.json`, recipeData); // POST to Firebase
   // }
-  saveRecipeToMealPlanner(
+
+  async saveRecipeToMealPlannerFireStore(
     userId: string,
     day: string,
     mealType: string,
     recipe: string
-  ): Observable<any> {
-    const recipeData = { recipe }; // Store only the recipe under mealType
-    console.log(recipeData);
-
-    return this.http.patch(
-      `${this.mealplannerUrl}/${userId}/${day}/${mealType}.json`,
-      recipeData
+  ) {
+    const mealPlannerRef = this.firestore.collection(
+      `users/${userId}/mealPlanner`
     );
+    const docId = `${day}_${mealType}`; // Example: Monday_Breakfast
+
+    const mealData = {
+      day: day,
+      mealType: mealType,
+      recipe: recipe,
+      timestamp: new Date(),
+    };
+
+    try {
+      await mealPlannerRef.doc(docId).set(mealData);
+      console.log('Meal Plan added successfully!');
+    } catch (error) {
+      console.error('Error adding meal plan:', error);
+    }
   }
+
+  // getMealplannerRecipes(userId: string): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.mealplannerUrl}/${userId}.json`).pipe(
+  //     map((response) => {
+  //       console.log(response);
+  //       if (!response) return []; // If no data, return an empty array
+  //       return Object.values(response); // Convert Firebase object to array
+  //     })
+  //   );
+  // }
 
   getMealplannerRecipes(userId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.mealplannerUrl}/${userId}.json`).pipe(
       map((response) => {
-        console.log(response);
         if (!response) return []; // If no data, return an empty array
         return Object.values(response); // Convert Firebase object to array
       })
     );
   }
+  getMealPlan(userId: string) {
+    return this.firestore
+      .collection(`users/${userId}/mealPlanner`)
+      .valueChanges({ idField: 'id' });
+  }
 
-  // async addRecipe(recipe: any) {
-  //   try {
-  //     const response: any = await this.http
-  //       .post(this.apiUrl, recipe)
-  //       .toPromise();
-  //     const generatedId = response.name; // Firebase-generated key
-  //     const updatedRecipe = { ...recipe, id: generatedId };
-
-  //     const currentRecipes = this.recipes.getValue();
-  //     this.recipes.next([...currentRecipes, updatedRecipe]);
-
-  //     await this._storage?.set('recipes', this.recipes.getValue());
-  //   } catch (error) {
-  //     console.error('Error saving recipe:', error);
-  //   }
-  // }
   async addRecipe(recipe: Recipe) {
     try {
       const user = await this.afAuth.currentUser;
@@ -427,12 +437,6 @@ export class RecipieService {
     this.removeFromFavorites(recipe);
   }
 
-
-
-
-
-
-
   deleteRecipeFromAllRecipe(recipe: any) {
     console.log('Removing favorite:', recipe);
     console.log('Recipe ID:', recipe.id); // Check if this is defined
@@ -446,7 +450,7 @@ export class RecipieService {
     this.getRecipes(); // Reload the recipes after deletion
   }
 
-  deleteRecipeFromAllRecipeCommunity(recipe: any){
+  deleteRecipeFromAllRecipeCommunity(recipe: any) {
     console.log('Removing recipe from recipecommunity:', recipe);
 
     if (!recipe.id) {
@@ -465,45 +469,50 @@ export class RecipieService {
           reject('User not authenticated');
           return;
         }
-  
+
         console.log('Removing favorite:', recipe);
         const userId = user.uid;
-  
+
         // const favoriteRef = this.firestore
         //   .collection(`favorites/${userId}/userFavorites`)
         //   .doc(recipe.id);
-  
+
         const recipeRef = this.firestore.collection('recipes').doc(recipe.id);
-  
-        const recipeCommunityRef = this.firestore.collection('recipeCommunity/${userId}')
-        .doc(recipe.id);
+
+        const recipeCommunityRef = this.firestore
+          .collection('recipeCommunity/${userId}')
+          .doc(recipe.id);
 
         // console.log('Favorite Reference:', favoriteRef);
         console.log('Recipe Reference:', recipeRef);
         console.log('recipeCommunity Reference:', recipeCommunityRef);
-  
+
         // ✅ First, remove from 'favorites' collection
         recipeCommunityRef
           .delete()
           .then(() => {
             console.log('Recipe removed from user favorites');
-  
+
             // ✅ Then, update the 'recipes' collection to mark as non-favorite
             return recipeRef.update({ isPublic: false });
           })
           .then(() => {
             recipe.public = false; // ✅ Update local state
-            console.log('Updated "recipecommunity" field in recipes collection');
+            console.log(
+              'Updated "recipecommunity" field in recipes collection'
+            );
             resolve();
           })
           .catch((error) => {
-            console.error('Error updating/removing from recipecommunity:', error);
+            console.error(
+              'Error updating/removing from recipecommunity:',
+              error
+            );
             reject(error);
           });
       });
     });
   }
-  
 
   removeFavoriteFromAllRecipe(recipe: any): Promise<void> {
     return new Promise((resolve, reject) => {
@@ -513,28 +522,28 @@ export class RecipieService {
           reject('User not authenticated');
           return;
         }
-  
+
         console.log('Removing favorite:', recipe);
         const userId = user.uid;
-  
+
         const favoriteRef = this.firestore
           .collection(`favorites/${userId}/userFavorites`)
           .doc(recipe.id);
-  
+
         const recipeRef = this.firestore.collection('recipes').doc(recipe.id);
-  
+
         // const recipeCommunityRef = this.firestore.collection('recipeCommunity').doc(recipe.id);
 
         console.log('Favorite Reference:', favoriteRef);
         console.log('Recipe Reference:', recipeRef);
         // console.log('recipeCommunity Reference:', recipeCommunityRef);
-  
+
         // ✅ First, remove from 'favorites' collection
         favoriteRef
           .delete()
           .then(() => {
             console.log('Recipe removed from user favorites');
-  
+
             // ✅ Then, update the 'recipes' collection to mark as non-favorite
             return recipeRef.update({ favorites: 'f' });
           })
@@ -550,7 +559,7 @@ export class RecipieService {
       });
     });
   }
-  
+
   isFavorite(recipe: any): boolean {
     const currentFavorites = this.favorites.getValue();
 
@@ -654,14 +663,17 @@ export class RecipieService {
   // }
   updateEditRecipe(recipeId: string, updatedRecipe: any): Promise<void> {
     console.log('Updating Recipe:', recipeId);
-  
+
     if (!recipeId) {
-      return Promise.reject(new Error('Recipe ID is required to update the recipe.'));
+      return Promise.reject(
+        new Error('Recipe ID is required to update the recipe.')
+      );
     }
-  
+
     const recipeRef = this.firestore.collection('recipes').doc(recipeId);
-  
-    return recipeRef.update(updatedRecipe)
+
+    return recipeRef
+      .update(updatedRecipe)
       .then(() => {
         console.log('Recipe updated successfully in Firestore');
       })
@@ -670,7 +682,7 @@ export class RecipieService {
         throw error;
       });
   }
-  
+
   // updateEditRecipe(userId: string, recipeId: string, recipeData: any): Observable<any> {
   //   const url = `${this.baseUrl}/${userId}/recipes/${recipeId}.json`; // Ensure correct path
   //   return this.http.put(url, recipeData);
@@ -680,6 +692,4 @@ export class RecipieService {
   //   const url = `${this.apiUrl}/${userId}/recipes/${recipeId}.json`;
   //   return firstValueFrom(this.http.put(url, updatedRecipe));
   // }
-
-  
 }
