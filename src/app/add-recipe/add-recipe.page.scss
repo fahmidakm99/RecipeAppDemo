@@ -13,8 +13,10 @@ ion-button {
 }
 
 .greenAdd {
-  --background: var(--green); /* Green background */
-  --color: var(--white); /* Text color (white) */
+  --background: var(--green);
+  /* Green background */
+  --color: var(--white);
+  /* Text color (white) */
 }
 
 .blueCancel {
@@ -41,4 +43,36 @@ ion-button {
 
 .addIngredient-color {
   color: var(--primary-color);
+}
+
+// .camera-btn{
+//   width: fit-content;
+//   --background:#6b6b6b;
+//   color:var(--white);
+// }
+.upload-row {
+  align-items: center;
+}
+
+.camera-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.camera-btn {
+  --background: #6b6b6b;
+  color: var(--white);
+  --padding-start: 0;
+  --padding-end: 0;
+  --border-radius: 4px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ion-icon {
+    font-size: 19px;
+  }
 }
