@@ -16,8 +16,34 @@
 
     <ion-item>
       <ion-label position="stacked">Recipe Image</ion-label>
-      <ion-input #fileInput type="file" accept="image/*" (change)="onImageChange($event)"></ion-input>
+
+      <!-- File Picker -->
+      <!-- <ion-button expand="block" color="medium" (click)="fileInput.click()">
+        <ion-icon name="images" slot="start"></ion-icon> Upload from Gallery
+      </ion-button>
+      <input #fileInput type="file" accept="image/*" hidden (change)="onImageChange($event)" /> -->
+
+
+      <ion-grid>
+        <ion-row class="upload-row">
+          <ion-col size="10">
+            <ion-input #fileInput type="file" accept="image/*" (change)="onImageChange($event)"></ion-input>
+          </ion-col>
+          <ion-col *ngIf="!isWeb" size="2" class="camera-col">
+            <ion-button expand="block" (click)="captureFromCamera()" class="camera-btn">
+              <ion-icon name="camera"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <!-- <ion-input #fileInput type="file" accept="image/*" (change)="onImageChange($event)" ></ion-input>
+ 
+      <ion-button *ngIf="!isWeb" expand="block" color="medium" (click)="captureFromCamera()" class="camera-btn" >
+        <ion-icon name="camera" slot="start"></ion-icon>
+      </ion-button> -->
     </ion-item>
+
     <ion-item *ngIf="image">
       <ion-label position="stacked">Image Preview</ion-label><br>
       <img [src]="image" alt="Image preview" style="width: 100%; height: auto;">
