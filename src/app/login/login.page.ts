@@ -79,28 +79,48 @@ export class LoginPage {
   // }
 
   // Login with Email & Password
+  // async login() {
+  //   if (!this.email || !this.password) {
+  //     this.showAlert('Error', 'Please enter email and password.');
+  //     return;
+  //   }
+
+  //   this.isLoading = true;
+  //   const loading = await this.loadingCtrl.create({ message: 'Logging in...' });
+  //   await loading.present();
+
+  //   try {
+  //     await this.afAuth.signInWithEmailAndPassword(this.email, this.password);
+  //     await loading.dismiss();
+  //     this.isLoading = false;
+  //     this.navCtrl.navigateRoot('/home'); // Redirect after login
+  //   } catch (error) {
+  //     await loading.dismiss();
+  //     this.isLoading = false;
+  //     this.showAlert('Error', 'Incorrect email or password.');
+  //   }
+  // }
+  
   async login() {
     if (!this.email || !this.password) {
       this.showAlert('Error', 'Please enter email and password.');
       return;
     }
-
+  
     this.isLoading = true;
-    const loading = await this.loadingCtrl.create({ message: 'Logging in...' });
-    await loading.present();
-
+  
     try {
       await this.afAuth.signInWithEmailAndPassword(this.email, this.password);
-      await loading.dismiss();
       this.isLoading = false;
-      this.navCtrl.navigateRoot('/home'); // Redirect after login
+      this.navCtrl.navigateRoot('/home');
     } catch (error) {
-      await loading.dismiss();
       this.isLoading = false;
-      this.showAlert('Error', 'Incorrect email or password.');
+      this.showAlert('Login Failed', 'Incorrect email or password.');
     }
   }
+  
 
+  
   loginUser(email: string, password: string) {
     return this.afAuth.signInWithEmailAndPassword(email, password);
   }
