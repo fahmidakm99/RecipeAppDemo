@@ -101,23 +101,24 @@ export class LoginPage {
   //   }
   // }
   
-  async login() {
-    if (!this.email || !this.password) {
-      this.showAlert('Error', 'Please enter email and password.');
-      return;
-    }
-  
-    this.isLoading = true;
-  
-    try {
-      await this.afAuth.signInWithEmailAndPassword(this.email, this.password);
-      this.isLoading = false;
-      this.navCtrl.navigateRoot('/home');
-    } catch (error) {
-      this.isLoading = false;
-      this.showAlert('Login Failed', 'Incorrect email or password.');
-    }
+ async login() {
+  if (!this.email || !this.password) {
+    this.showAlert('Error', 'Please enter email and password.');
+    return;
   }
+
+  this.isLoading = true; // Show spinner
+
+  try {
+    await this.afAuth.signInWithEmailAndPassword(this.email, this.password);
+    this.isLoading = false; // Hide spinner after success
+    this.navCtrl.navigateRoot('/home');
+  } catch (error) {
+    this.isLoading = false; // Hide spinner if error
+    this.showAlert('Login Failed', 'Incorrect email or password.');
+  }
+}
+
   
 
   
