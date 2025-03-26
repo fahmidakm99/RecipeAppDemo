@@ -63,7 +63,11 @@
             <ion-card-header>
               <ion-card-title class="recipieheading">{{ recipe.name }}</ion-card-title>
             </ion-card-header>
-            <ion-card-content> {{ recipe.description }} </ion-card-content>
+            <ion-card-content class="recipeDescriptionContent"> 
+              <span class="tooltip" [attr.data-tooltip]="recipe.description">
+                {{ recipe.description }}
+              </span>  
+            </ion-card-content>
           </div>
         </ion-card>
       </div>
