@@ -28,6 +28,11 @@
       <ion-card-subtitle>Categories: {{ recipe?.category?.join(', ') }}</ion-card-subtitle>
     </ion-card-header>
 
+    <ion-card-content>
+      <p class="preparation-text">{{ recipe?.description }}</p>
+    </ion-card-content>
+
+
 <!-- New Fields: Preparation Time & serves -->
 <ion-card-header>
   <ion-row>
