@@ -70,3 +70,10 @@ ion-icon {
   --color: var(--orange-dark);
   /* Darker shade of orange for expanded state */
 }
+.description{
+  // overflow: hidden;
+  max-height: 80px; /* Adjust based on your design */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
