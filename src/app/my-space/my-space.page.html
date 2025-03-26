@@ -120,7 +120,7 @@
         <ion-item *ngFor="let recipe of filteredOtherUsersRecipes">
           <ion-label>
             <h2>{{ recipe.name }}</h2>
-            <p>{{ recipe.description || 'No description available' }}</p>
+            <p class="description">{{ recipe.description || 'No description available' }}</p>
           </ion-label>
           <ion-button fill="outline" color="tertiary" (click)="viewRecipeDetails(recipe.id)">
             View
@@ -141,7 +141,7 @@
         <ion-item *ngFor="let recipe of filteredMyPublicRecipes">
           <ion-label>
             <h2>{{ recipe.name }}</h2>
-            <p>{{ recipe.description || 'No description available' }}</p>
+            <p class="description">{{ recipe.description || 'No description available' }}</p>
           </ion-label>
           <ion-button fill="outline" color="tertiary" (click)="viewRecipeDetails(recipe.id)">
             View
