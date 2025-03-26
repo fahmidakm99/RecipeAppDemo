@@ -2,9 +2,17 @@
   <ion-toolbar class="toolbar">
     <ion-buttons slot="start">
       <!-- <ion-back-button defaultHref="/all-recipes"></ion-back-button> -->
-      <ion-back-button defaultHref="" (click)="goBack()" ></ion-back-button>
+      <ion-back-button defaultHref="" (click)="goBack()"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ recipe?.name }}</ion-title>
+    <!-- Edit icon -->
+    <ion-buttons slot="end">
+      <!-- <ion-button (click)="navigateToEditRecipe()"> -->
+      <ion-button (click)="editRecipe(recipe)">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
@@ -15,6 +23,10 @@
     <ion-card-header>
       <div class="title-container">
         <ion-card-title>{{ recipe?.name }}</ion-card-title>
+        <ion-button class="privacy-toggle-btn" fill="outline" [color]="recipe.isPublic ? 'success' : 'medium'"
+          (click)="togglePrivacy(recipe)">
+          {{ recipe.isPublic ? 'Public' : 'Private' }}
+        </ion-button>
       </div>
     </ion-card-header>
 
@@ -32,30 +44,29 @@
       <p class="preparation-text">{{ recipe?.description }}</p>
     </ion-card-content>
 
+    <!-- New Fields: Preparation Time & serves -->
+    <ion-card-header>
+      <ion-row>
+        <ion-col>
+          <ion-card-subtitle>
+            <!-- <ion-icon name="alarm-outline"></ion-icon> -->
+            <img src="assets/images/prepTime.svg" alt="prepTime" class="prepTime" />
+            Prep Time: {{ recipe?.prepTime }}m</ion-card-subtitle>
 
-<!-- New Fields: Preparation Time & serves -->
-<ion-card-header>
-  <ion-row>
-  <ion-col>
-    <ion-card-subtitle>
-      <!-- <ion-icon name="alarm-outline"></ion-icon> -->
-      <img src="assets/images/prepTime.svg" alt="prepTime" class="prepTime" />
-      Prep Time: {{ recipe?.prepTime }}m</ion-card-subtitle>
-  
-  </ion-col>
-  <ion-col>
-    <ion-card-subtitle>
-      <img src="assets/images/serves.svg" alt="serves" class="serves" />
-      Serves: {{ recipe?.serves }} people</ion-card-subtitle>
- 
-  </ion-col>
-</ion-row>
-</ion-card-header>
+        </ion-col>
+        <ion-col>
+          <ion-card-subtitle>
+            <img src="assets/images/serves.svg" alt="serves" class="serves" />
+            Serves: {{ recipe?.serves }} people</ion-card-subtitle>
 
-<!-- Ingredients Section -->
-<ion-card-header>
-  <ion-card-title>Ingredients</ion-card-title>
-</ion-card-header>
+        </ion-col>
+      </ion-row>
+    </ion-card-header>
+
+    <!-- Ingredients Section -->
+    <ion-card-header>
+      <ion-card-title>Ingredients</ion-card-title>
+    </ion-card-header>
 
     <ion-card-content>
       <ion-list *ngIf="recipe?.ingredients && recipe.ingredients.length">
@@ -69,6 +80,16 @@
           <ion-label *ngIf="ingredient.unit === 'needed'">
             as {{ ingredient.unit }}
           </ion-label>
+
+          <!-- Dynamic Shopping Cart Icon -->
+          <ion-icon [name]="shoppingListService.isInShoppingList(ingredient) ? 'cart' : 'cart-outline'" slot="end"
+            [color]="shoppingListService.isInShoppingList(ingredient) ? 'success' : 'primary'"
+            (click)="shoppingListService.toggleIngredient(ingredient)">
+          </ion-icon>
+
+          <!-- Shopping Cart Icon -->
+          <!-- <ion-icon name="cart" slot="end" color="primary"></ion-icon>  -->
+
         </ion-item>
       </ion-list>
     </ion-card-content>
