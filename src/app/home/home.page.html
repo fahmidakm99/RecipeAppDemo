@@ -77,8 +77,12 @@
 
 
     <div class="slide-buttons" *ngIf="recipes.length > 1" [hidden]="recipes.length <= 1">
-      <button class="prev" (click)="prevSlide()">&lt;</button>
-      <button class="nxt" (click)="nextSlide()">&gt;</button>
+      <button class="prev" (click)="prevSlide()">
+        <ion-icon class="arrow" name="chevron-back-outline"></ion-icon>
+      </button>
+      <button class="nxt" (click)="nextSlide()">
+        <ion-icon class="arrow" name="chevron-forward-outline"></ion-icon>
+      </button>
     </div>
   </div>
 
