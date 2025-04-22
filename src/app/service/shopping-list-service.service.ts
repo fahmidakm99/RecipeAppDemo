@@ -762,20 +762,38 @@ removeFromList(ingredient: any) {
   
     const weeklyListRef = this.firestore.collection(`users/${this.userId}/weeklyShoppingList`);
   
+  //   list.forEach((item) => {
+  //     weeklyListRef.ref.where('name', '==', item.name).get().then((snapshot) => {
+  //       if (snapshot.empty) {
+  //         // Only add if the item does not exist
+  //         weeklyListRef.add(item)
+  //           .then(() => console.log('Weekly shopping list item saved:', item))
+  //           .catch((error) => console.error('Error saving weekly shopping list item:', error));
+  //       } else {
+  //         console.log(`Item '${item.name}' already exists in the weekly shopping list.`);
+  //       }
+  //     });
+  //   });
+  // }
+  this.firestore.firestore.runTransaction(async (transaction) => {
+    const snapshot = await weeklyListRef.ref.get();
+    
+    // Delete existing items
+    snapshot.forEach((doc) => transaction.delete(doc.ref));
+
+    // Add new items
     list.forEach((item) => {
-      weeklyListRef.ref.where('name', '==', item.name).get().then((snapshot) => {
-        if (snapshot.empty) {
-          // Only add if the item does not exist
-          weeklyListRef.add(item)
-            .then(() => console.log('Weekly shopping list item saved:', item))
-            .catch((error) => console.error('Error saving weekly shopping list item:', error));
-        } else {
-          console.log(`Item '${item.name}' already exists in the weekly shopping list.`);
-        }
-      });
+      const newItemRef = weeklyListRef.doc(); // Generate a new document reference
+      transaction.set(newItemRef.ref, item);
+
     });
-  }
-  
+
+    console.log('Updated Monthly Shopping List:', list);
+  }).catch((error) => {
+    console.error('Error updating monthly shopping list:', error);
+  });
+}
+
   getMonthlyList() {
     return this.monthlyShoppingList$;
   }
